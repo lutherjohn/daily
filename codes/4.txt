@@ -1,0 +1,56 @@
+<br />
+<section class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <?php echo form_open(); ?>
+            <div class="form-group">
+            
+                <div class="col-md-6">
+                    <label for="Select2">Select Client/s</label>
+                                
+                    <select name="multiple_assign" size="11" multiple class="form-control" id="select1">
+                        <?php 
+                            foreach($clients as $client){
+                        ?>
+                            <option><?php echo $client['clientsFirstname']; ?></option>
+
+                        <?php } ?>    
+
+                    </select>  
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Select2"> Client/s Added</label>
+                    <select name="multiple_assign2[]" size="11" multiple class="form-control" id="select2">
+                    </select>                 
+                </div>
+
+
+            </div>
+
+            <?php echo form_close(); ?>
+        </div>
+           
+    </div>
+</section>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+
+        $('#add').click(function(){
+            return !$('#select1 option:selected').remove().appendTo('#select2');
+        });
+        $('#remove').click(function(){
+            return !$('#select2 option:selected').remove().appendTo('#select1');
+        });
+
+        $('#clear').click(function(){
+            return !$('#select2 option:selected').remove().appendTo('#select1');
+        });
+
+    });
+</script>

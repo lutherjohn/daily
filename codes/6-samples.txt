@@ -1,0 +1,44 @@
+function insertAddClientsToAgent(){
+        $Pquery = $this->db->prepare({
+
+
+            $sql = `INSERT INTO tblassignclients (userId,clientsId) VALUES (?,?)`;
+
+            return (new Query($db)->setQuery($sql));
+        });
+    }
+	
+	ClientsAgentModel
+	=>adding clients to agents
+	
+	
+	 function insertData(){
+
+        var base_url = <?php echo base_url('agents/addAssignClients');?>;
+         $.ajax({
+                url: base_url,
+                data: JSON.stringify({ "users": user, "multiple_assign2" : multiple_assign2}),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                success: function (responseModel) {
+                    if (responseModel.Error == false) {
+
+                       /*  if (responseModel.Data.length > 0) {
+                            LoadActivityOTNotificationForm(responseModel.Data);
+                        } */
+
+                    } else {
+                        alert(responseModel.StatusText);
+                    }
+                },
+                error: function (xhr, statusText, ex) {
+                    var responseModel = JSON.parse(xhr.responseText);
+                    alert(responseModel.StatusText);
+                },
+
+
+            }) 
+       /* */
+            console.log("button click");
+    }

@@ -1,0 +1,60 @@
+<section>
+    <div class="container">
+        <div class ="row">
+        <form action="/clients/insertLeadGen" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label for="inputDate" class="form-label">Date</label>
+                <input type="text" name="date" class="form-control" id="inputDate">
+            </div>
+            <div class="col-md-6">
+                <label for="inputConnectionRequest" class="form-label">Connection Request</label>
+                <input type="text" name="connectionRequest" class="form-control" id="inputConnectionRequest">
+            </div>
+            <div class="col-12">
+                <label for="inputTotalLinkedInConnections" class="form-label">Total LinkedIn Connections</label>
+                <input type="text" name="totalLinkedInConnections" class="form-control" id="inputTotalLinkedInConnections" placeholder="LinkedIn Connections">
+            </div>
+            <div class="col-12">
+                <label for="inputClicks" class="form-label">Clicks</label>
+                <input type="text" name="clicks" class="form-control" id="inputClicks" placeholder="">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+            </form>                                         
+        </div>        
+    </div>
+    
+</section>
+
+
+<section>
+    <h1>Lead Generation</h1>
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <td>Date</td>
+                <td>Connection Request</td>
+                <td>Total LinkedIn Connections</td>
+                <td>Clicks</td>
+            </tr>
+            <?php
+                if($users){
+                    foreach($users as $user){
+            ?>
+                <tr>
+                        <td><?php echo $user['date'];?></td>
+                        <td><?php echo $user['connectionRequestSent'];?></td>
+                        <td><?php echo $user['totalLinkedInConnections'];?></td>
+                        <td><?php echo $user['clicks'];?></td>
+                </tr>
+            <?php
+                    }
+
+                }
+            
+            ?>
+        </table>
+    </div>
+
+</section>

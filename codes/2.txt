@@ -1,0 +1,303 @@
+<?php namespace App\Controllers;
+
+use App\Models\ClientModel;
+use App\Models\InsertClientModel;
+use App\Models\InsertAgentsModel; 
+
+
+class Clients extends BaseController
+{	
+
+    function clientList(){
+
+		//$data['userData'] = $viewLeadGen->orderBy('leadGenId', 'DESC')->pagination(10);
+
+		//$data['pagination_link'] = $viewLeadGen->pager;
+
+		$viewLeadGen = new InsertClientModel();
+
+		$data['users'] = $viewLeadGen->orderBy('leadGenId', 'DESC')->findAll();
+
+		
+
+
+		echo view('templates/header', $data);
+		echo view('clients/clientList');
+		echo view('templates/footer');
+
+	}
+
+	//Modals
+
+	function loadAddModal(){
+
+		echo view('templates/header');
+		echo view('clients/loadAddModal');
+		echo view('templates/footer');
+
+	}
+
+
+
+	//Insert Data
+	function insertLeadGen(){
+		helper('form');
+
+		$insert = new InsertClientModel();
+		
+
+		$insert->save([
+				'taskId' => 4,
+				'clientsId' => 3,
+				'date' => $this->request->getPost('date'),
+				'connectionRequestSent' => $this->request->getPost('connectionRequest'),
+				'totalLinkedInConnections' => $this->request->getPost('totalLinkedInConnections') ,
+				'clicks' => $this->request->getPost('clicks')
+			]);
+		
+
+		return redirect()->to('/');
+
+
+		/* if(! $this->validate([
+			'date' => 'required',
+			'connectionRequest' => 'required',
+			'totalLinkedInConnections' => 'required' ,
+			'clicks' => 'required'
+		])){
+
+			echo view('templates/header');
+			echo view('clients/clients');
+			echo view('templates/footer');
+
+		}else{
+			$model->save(
+				[
+					'date' => $this->request->getVar('date'),
+					'connectionRequest' => $this->request->getVar('connectionRequestSent'),
+					'totalLinkedInConnections' => $this->request->getVar('totalLinkedInConnections') ,
+					'clicks' => $this->request->getVar('clicks')
+				]
+			);
+
+			return redirect()->to('/');
+		} */
+
+	}
+
+
+	function insertAgents(){
+
+		helper('form');
+
+
+		$insertAgents = new InsertAgentsModel();
+
+		$insertAgents->save([
+			"userLastname" => $this->request->getPost('lastname'),	
+			"userFirstname" => $this->request->getPost('firstname'), 
+			"userMiddlename" => $this->request->getPost('middlename'), 
+			"userEmailAddress" => $this->request->getPost('email'),
+			"userPassword" => $this->request->getPost('password')
+		]);
+
+		session()->setFlashdata('message', 'Added Successfully!');
+        session()->setFlashdata('alert-class', 'alert-success');
+
+		return redirect()->to('/');
+	}
+
+
+	//Edit
+
+	function editAgents($id=0){
+
+		$viewAgents = new InsertAgentsModel();
+
+		$data['users'] = $viewAgents->where('userId', $id)->first();
+		
+		echo view('templates/header', $data);
+		echo view('clients/loadEditAgents');
+		echo view('templates/footer');
+		//loadEditAgents
+	}
+
+
+	//update
+
+	function updateAgents($id){
+
+		$update = new insertAgentsModel();
+
+		$postData = $this->request->getPost();
+
+
+		$data = [
+			"userLastname" => $postData['lastname'],	
+			"userFirstname" => $postData['firstname'], 
+			"userMiddlename" => $postData['middlename'], 
+			"userEmailAddress" => $postData['email']
+		];
+
+		$update->update($id,$data);
+
+		session()->setFlashdata('message', 'Updated Successfully!');
+        session()->setFlashdata('alert-class', 'alert-success');
+
+		return redirect()->to('/'); 
+		
+
+	}
+
+	//delete
+
+	function deleteAgents($id){
+
+		$deleteId = new insertAgentsModel();
+
+		$deleteId->delete($id);
+
+		return redirect()->to('/'); 
+
+
+	}
+}
+
+
+
+=====================================================================================================================
+Edit
+
+
+
+<section>
+    <div class="container">
+    <div class ="row">
+    <div class="col">
+        <div class="p-3 bg-light"><h2>Update Agent Details</h2></div>
+    </div>
+        <form action="/clients/updateAgents/<?php echo $users['userId']; ?>" method="post" class="row g-3">
+            <div class="col-md-4">
+                <label for="inputLastname" class="form-label">Lastname</label>
+                <input type="text" name="lastname" class="form-control" id="inputLastname" value="<?php echo $users['userLastname']; ?>">
+            </div>
+            <div class="col-md-4">
+                <label for="inputFirstname" class="form-label">Firstname</label>
+                <input type="text" name="firstname" class="form-control" id="inputFirstname" value="<?php echo $users['userFirstname']; ?>">
+            </div>
+            <div class="col-md-4">
+                <label for="inputMiddlename" class="form-label">Middlename</label>
+                <input type="text" name="middlename" class="form-control" id="inputMiddlename" value="<?php echo $users['userMiddlename']; ?>">
+            </div>
+            <div class="col-3">
+                <label for="inputemail" class="form-label">Email Address</label>
+                <input type="text" name="email" class="form-control" id="inputemail" value="<?php echo $users['userEmailAddress']; ?>">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-info" name="submit">Update Details</button>
+            </div>
+            </form>                                         
+        </div>      
+    </div>            
+</section>
+
+
+=============================================================================================================================================================
+Added
+<section>
+    <div class="container">
+       <p>Modal</p>
+       <div class ="row">
+        <form action="/clients/insertLeadGen" method="post" class="row g-3">
+            <div class="col-md-6">
+                <label for="inputDate" class="form-label">Date</label>
+                <input type="text" name="date" class="form-control" id="inputDate">
+            </div>
+            <div class="col-md-6">
+                <label for="inputConnectionRequest" class="form-label">Connection Request</label>
+                <input type="text" name="connectionRequest" class="form-control" id="inputConnectionRequest">
+            </div>
+            <div class="col-12">
+                <label for="inputTotalLinkedInConnections" class="form-label">Total LinkedIn Connections</label>
+                <input type="text" name="totalLinkedInConnections" class="form-control" id="inputTotalLinkedInConnections" placeholder="LinkedIn Connections">
+            </div>
+            <div class="col-12">
+                <label for="inputClicks" class="form-label">Clicks</label>
+                <input type="text" name="clicks" class="form-control" id="inputClicks" placeholder="">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-info">Submit</button>
+            </div>
+            </form>                                         
+        </div>      
+    </div>
+    
+</section>
+
+===================================================================================================================================================================
+
+/* if(! $this->validate([
+			'date' => 'required',
+			'connectionRequest' => 'required',
+			'totalLinkedInConnections' => 'required' ,
+			'clicks' => 'required'
+		])){
+
+			echo view('templates/header');
+			echo view('clients/clients');
+			echo view('templates/footer');
+
+		}else{
+			$model->save(
+				[
+					'date' => $this->request->getVar('date'),
+					'connectionRequest' => $this->request->getVar('connectionRequestSent'),
+					'totalLinkedInConnections' => $this->request->getVar('totalLinkedInConnections') ,
+					'clicks' => $this->request->getVar('clicks')
+				]
+			);
+
+			return redirect()->to('/');
+		} */
+		
+		//$routes->match(['get', 'post'], 'reports/insertLeadGen', 'Reports::insertLeadGen');
+		
+		
+========================================================================================================
+
+function updateAgents($id){
+
+		helper('form');
+
+		$updateModelAgents = new AgentsModel();
+
+		$postData = $this->request->getPost();	
+
+		 //= $this->request->getPost("id");
+
+		//$submit = $this->request->getPost("submit");
+
+
+			/* $data = [
+				"userLastname" => $postData['updateLastname'],	
+				"userFirstname" => $postData['updateFirstname'], 
+				"userMiddlename" => $postData['updateMiddlename'], 
+				"userEmailAddress" => $postData['updateEmail']
+			];
+	
+			$updateModelAgents->update($id,$data); */
+
+			$updateModelAgents->update([
+				"UserId" =>$id,
+				"userLastname" => $postData['updateLastname'],	
+				"userFirstname" => $postData['updateFirstname'], 
+				"userMiddlename" => $postData['updateMiddlename'], 
+				"userEmailAddress" => $postData['updateEmail']
+			]);
+	
+			session()->setFlashdata('message', 'Updated Successfully!');
+			session()->setFlashdata('alert-class', 'alert-success');
+	
+			return redirect()->to('agentList'); 
+
+	}
