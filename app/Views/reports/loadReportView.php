@@ -19,6 +19,8 @@
                 <th>Clicks</th>
             </tr>
 
+            
+
             <?php
                 if($tasks == null){
             ?>
