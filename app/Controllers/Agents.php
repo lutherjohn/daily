@@ -125,7 +125,7 @@ class Agents extends BaseController
 
 		$data = ([
 			'users' => $this->modelAgents->where('userId', $id)->first(),
-			'clients' => $this->modelClientModel->orderby('clientsId', 'DESC')->findAll()
+			'clients' => $this->modelClientModel->orderby('clientsId')
 
 		]);
 
@@ -167,7 +167,6 @@ class Agents extends BaseController
 
 		//'users' => $this->modelAgents->where('userId', $id)->first()
 		$data = ([
-
 			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($id),
 			"users" => $this->modelAgents->where('userId', $id)->first()
 			

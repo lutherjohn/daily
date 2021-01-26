@@ -30,9 +30,10 @@ class Pages extends BaseController
 
 		//$data['agents'] = $viewAgents->orderBy('userId', 'ASC')->findAll();
 
-		$data['agents'] = $this->agentsModel->countAll();
-
-		$data['clients'] = $this->clientsModel->countAll();
+		$data = ([
+			'agents' => $this->agentsModel->countAll(),
+			'clients' => $this->clientsModel->countAll()
+		]);
 
 
 		echo view('templates/header', $data);

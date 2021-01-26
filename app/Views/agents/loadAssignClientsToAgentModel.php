@@ -4,10 +4,11 @@
     <div class="row gx-5">
     
     <p class="note note-primary">
-    <strong>Agent Name:</strong>
-    <?php echo $users["userFirstname"] . " " . $users["userLastname"]; ?>
+        <strong>Agent Name:</strong>
+        <?php echo $users["userFirstname"] . " " . $users["userLastname"]; ?>
+        <br />
     </p>
-  
+    
     <table class="table">
     <tr>
         <th>Client/s Name</th>

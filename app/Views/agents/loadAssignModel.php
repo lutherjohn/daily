@@ -7,7 +7,8 @@
             <?php echo $users['userFirstname']; ?>
             <?php echo $users['userMiddlename']; ?>
             <?php echo $users['userLastname']; ?>
-        </p>       
+        </p>   
+        <span class="badge bg-secondary">4</span>    
     </div>
 
     <div class="row">   
