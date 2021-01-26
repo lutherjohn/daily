@@ -55,7 +55,10 @@ class Clients extends BaseController
 
 	function editClients($id){
 
-		$data["clients"] = $this->clientsModel->where("clientsId", $id)->first();
+		$data = ([
+			"clients" => $this->clientsModel->where("clientsId", $id)->first(),
+			"title" => "Update Client Details"
+		]);
 
 		echo view('templates/header', $data);
 		echo view('clients/loadEditClients');

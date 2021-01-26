@@ -78,7 +78,10 @@ class Agents extends BaseController
 
 	function editAgents($id){
 
-		$data['users'] = $this->modelAgents->where('userId', $id)->first();
+		$data = ([
+			'users' => $this->modelAgents->where('userId', $id)->first(),
+			"title" => "Update Agent Details"
+		]);
 		
 		echo view('templates/header', $data);
 		echo view('agents/loadEditAgents');
@@ -125,8 +128,7 @@ class Agents extends BaseController
 
 		$data = ([
 			'users' => $this->modelAgents->where('userId', $id)->first(),
-			'clients' => $this->modelClientModel->orderby('clientsId')
-
+			'clients' => $this->modelClientModel->orderby("clientsId", "DESC")->findAll()
 		]);
 
 		echo view('templates/header', $data);
@@ -147,8 +149,8 @@ class Agents extends BaseController
 		foreach($postData['multiple_assign2'] as $multiple_assign2){
 
 			$this->modelAddClientsToAgents->save([
-			"userId" => $postData['users'],	
-			"clientsId" => $multiple_assign2
+				"userId" => $postData['users'],	
+				"clientsId" => $multiple_assign2
 			]);
 
 		}
@@ -164,17 +166,14 @@ class Agents extends BaseController
 
 	// get details
 	function getAssignClientsToAgents($id){
-
-		//'users' => $this->modelAgents->where('userId', $id)->first()
 		$data = ([
 			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($id),
-			"users" => $this->modelAgents->where('userId', $id)->first()
-			
+			"users" => $this->modelAgents->where('userId', $id)->first(),
+			"title"=>"Agents with their Assign Client/s"
 
 		]);
-		//
 		echo view('templates/header', $data);
-		echo view('agents/loadAssignClientsToAgentModel');
+		echo view('agents/loadAssignClientsToAgent');
 		echo view('templates/footer');
 
 	}

@@ -43,12 +43,7 @@
             ?>
 
         </table>
-      
-        
-        
-
-      
-          
+     
         </p>
     </div>
 </section>
