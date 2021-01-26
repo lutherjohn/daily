@@ -2,9 +2,12 @@
 <section class="container">
   <?php echo form_open('agents/addAssignClients');?>
     <div class="p-3">
-        <?php echo $users['userFirstname']; ?>
-        <?php echo $users['userMiddlename']; ?>
-        <?php echo $users['userLastname']; ?>
+        <p class="note note-primary">
+        <strong>Agent Name:</strong>
+            <?php echo $users['userFirstname']; ?>
+            <?php echo $users['userMiddlename']; ?>
+            <?php echo $users['userLastname']; ?>
+        </p>       
     </div>
 
     <div class="row">   
@@ -17,7 +20,7 @@
                 <?php 
                     foreach($clients as $client){
                 ?>
-                    <option value = <?php echo $client['clientsId']; ?> ><?php echo $client['clientsFirstname']; ?></option>
+                    <option value = <?php echo $client['clientsId']; ?> ><?php echo $client['clientsFirstname'] . " " . $client['clientsLastname']; ?></option>
 
                 <?php } ?>        
                 </select>          
