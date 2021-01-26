@@ -172,6 +172,7 @@ class Agents extends BaseController
 			
 
 		]);
+		//
 		echo view('templates/header', $data);
 		echo view('agents/loadAssignClientsToAgentModel');
 		echo view('templates/footer');
