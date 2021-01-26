@@ -5,10 +5,13 @@
     
     <p class="note note-primary">
     <strong>Agent Name:</strong>
-    <?php echo $users["userFirstname"]; ?>
+    <?php echo $users["userFirstname"] . " " . $users["userLastname"]; ?>
     </p>
   
     <table class="table">
+    <tr>
+        <th>Client/s Name</th>
+    </tr>
             <?php 
                 if($clients == null){
 
