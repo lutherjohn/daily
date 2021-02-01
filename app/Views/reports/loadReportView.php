@@ -8,7 +8,9 @@
         </div>    
         <br>
         <p class="note note-primary">
-        <strong>Agent Name:</strong> 
+        <strong>
+            Task Name: <?php echo $tasksName["tasks"];?>
+        </strong> 
         </p>
         <table class="table">
             <tr>

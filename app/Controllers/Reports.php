@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\ReportsModel;
+use App\Models\TasksModel;
 
 
 class Reports extends BaseController
@@ -8,9 +9,13 @@ class Reports extends BaseController
 
 	public $reportsModel;
 
+	public $tasksModel;
+
 	public function __construct(){
 
 		$this->reportsModel = new ReportsModel();
+		$this->tasksModel = new TasksModel();
+
 		helper('form');
 	}
 
@@ -41,6 +46,7 @@ class Reports extends BaseController
 
 		$data = ([
 				"tasks" => $this->reportsModel->getTaksById($id),
+				"tasksName" => $this->tasksModel->where("taskId",$id)->first(),
 				"title" =>"Task Details",
 				"connectionRequestSent" => $this->reportsModel->sumConnectionRequestSent()
 		]);		

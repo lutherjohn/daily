@@ -57,11 +57,11 @@ if(session()->has('message')){
                                     <i class="fas fa-user-edit"></i>
                                 </a>  
                             </td>
-                            <td>
-                                <a href= "<?php echo "deleteAgents/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Agent">
+                           <!--  <td>
+                                <a href= "<?php //echo "deleteAgents/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Agent">
                                     <i class="fas fa-user-times"></i>
                                 </a>                                
-                            </td>
+                            </td> -->
                             <td>
                                 <a href= "<?php echo "clientAgentsData/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Client to Agent">
                                 <i class="fas fa-user-friends"></i>

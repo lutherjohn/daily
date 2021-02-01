@@ -118,7 +118,7 @@ class Agents extends BaseController
 		session()->setFlashdata('message', 'Deleted Successfully!');
 		session()->setFlashdata('alert-class', 'alert-danger');
 
-		return redirect()->to('agentList'); 
+		return redirect('/agentList'); 
 
 	}
 
@@ -139,11 +139,6 @@ class Agents extends BaseController
 
 	//Assign clients to agents
 	function addAssignClients(){
-		//echo "add here";
-		//$user = $this->request->getPost("multiple_assign2");
-
-		//echo $user;
-		/**/
 		$postData = $this->request->getPost();
 		
 		foreach($postData['multiple_assign2'] as $multiple_assign2){

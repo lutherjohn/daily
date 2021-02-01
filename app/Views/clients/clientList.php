@@ -64,11 +64,11 @@ if(session()->has('message')){
                             <i class="fas fa-user-edit"></i>
                         </a>
                     </td>
-                    <td>
+                    <!-- <td>
                         <a href="#">
                             <i class="fas fa-user-times"></i>
                         </a>                        
-                    </td>
+                    </td> -->
                 </tr>
 
                 <?php
