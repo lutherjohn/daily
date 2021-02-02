@@ -1,16 +1,20 @@
 <?php namespace App\Controllers;
 
 use App\Models\ClientModel;
+use App\Models\AccessLevelModel;
 
 class Clients extends BaseController
 {	
 
 	public $clientsModel;
+	public $accessLevel;
 
 
 	public function __construct(){
 
 		$this->clientsModel = new ClientModel();
+
+		$this->accessLevel = new AccessLevelModel();
 
 		helper("form");
 
@@ -19,7 +23,10 @@ class Clients extends BaseController
 
     function clientList(){
 
-		$data['clients'] = $this->clientsModel->orderBy('clientsId', 'DESC')->findAll();
+		$data = ([
+			'clients' => $this->clientsModel->orderBy('clientsId', 'DESC')->findAll(),
+			'accessLevels' => $this->accessLevel->findAll()
+		]);
 
 		echo view('templates/header', $data);
 		echo view('clients/clientList');
@@ -29,15 +36,19 @@ class Clients extends BaseController
 
 	function crudClients(){
 
-
-		$postData = $this->request->getPOst();
+		$postData = $this->request->getPost();
 
 		$this->clientsModel->save([
 			"clientsFirstname" => $postData['firstname'],
 			"clientsMiddlename" =>$postData['middlename'],
 			"clientsLastname" => $postData['lastname'],
+			"clientsBussinessName" =>$postData['businessName'],
+			"clientsCampaignGoals" =>$postData['campaignGoal'],
+			"clientsDateStarted" =>date("Y-m-d"),
+			"clientsJointVenture" => $postData['jointVenture'],
 			"clientsEmailAddress" =>$postData['email'],
-			"clientsPassword" => $postData['password']
+			"clientsPassword" => $postData['password'],
+			"accesslevelsId" => $postData['userRoles']
 
 		]);
 

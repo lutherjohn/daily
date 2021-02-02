@@ -53,6 +53,8 @@ class Agents extends BaseController
 				"userEmailAddress" => $postData['email'],
 				"userPassword" => $postData['password']
 			]);
+
+			$session = session();
 	
 			session()->setFlashdata('message', 'Added Successfully!');
 			session()->setFlashdata('alert-class', 'alert-success');

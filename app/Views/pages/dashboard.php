@@ -1,5 +1,4 @@
 <br />
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -12,7 +11,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
                                 <p class="card-text">
-                                    <?php echo $agents; ?>
+                                    <!----count agents here php-->
                                 </p>
                             </div>
                             </div>
@@ -31,7 +30,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
                                 <p class="card-text">
-                                    <?php echo $clients; ?>
+                                    <!----count clients here php-->
                                 </p>
                             </div>
                             </div>

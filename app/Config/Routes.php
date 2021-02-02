@@ -31,6 +31,8 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
+$routes->get('pages/dashboard', 'Pages::dashboard');
+$routes->get('pages/loginValidation', 'Pages::loginValidation');
 $routes->get('agents/agentList', 'Agents::agentList');
 $routes->get('agents/crudAgents', 'Agents::crudAgents');
 $routes->get('agents/editAgents/(:num)', 'Agents::editAgents/$1');

@@ -115,6 +115,18 @@ if(session()->has('message')){
                         <label for="inputMiddlename" class="form-label">Middlename</label>
                         <input type="text" name="middlename" class="form-control" id="inputMiddlename" placeholder="">
                     </div>
+                    <div class="col-md-6">
+                        <label for="inputbusinessName" class="form-label">Business Name</label>
+                        <input type="text" name="businessName" class="form-control" id="inputbusinessName">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputcampaignGoal" class="form-label">Campaign Goal</label>
+                        <input type="text" name="campaignGoal" class="form-control" id="inputcampaignGoal">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputJointventure" class="form-label">Joint Venture</label>
+                        <input type="text" name="jointVenture" class="form-control" id="inputjointVenture" placeholder="">
+                    </div>
                     <div class="col-6">
                         <label for="inputemail" class="form-label">Email Address</label>
                         <input type="text" name="email" class="form-control" id="inputemail" placeholder="">
@@ -122,6 +134,21 @@ if(session()->has('message')){
                     <div class="col-6">
                         <label for="inputpassword" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="inputpassword" placeholder="">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputaccessLevels" class="form-label">Access Levels</label>
+                        <br>
+                        <select name="userRoles" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <option value="#"> Choose User Levels</option>
+                            <?php foreach($accessLevels as $accessLevel): ?>
+
+                                <option value="<?php echo $accessLevel['accesslevelsId']; ?>"><?php echo $accessLevel['accessLevels']; ?></option>
+
+
+                            <?php endforeach;?>
+
+                        </select>
+                        
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
