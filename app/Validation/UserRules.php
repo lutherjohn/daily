@@ -9,14 +9,14 @@ class UserRules {
         
         $model = new ClientModel();
 
-        $user = $model->where('clientsEmailAddress', $data['email'] )
+        $user = $model->where('accountEmail', $data['email'] )
                     ->first();
 
 
         if(!$user){
             return false;
 
-            return password_verify($data['password'], $user['clientsPassword']);
+            return password_verify($data['password'], $user['accountPassword']);
 
         }
 

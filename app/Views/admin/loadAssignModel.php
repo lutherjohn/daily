@@ -4,9 +4,9 @@
     <div class="p-3">
         <p class="note note-primary">
         <strong>Agent Name:</strong>
-            <?php echo $users['userFirstname']; ?>
-            <?php echo $users['userMiddlename']; ?>
-            <?php echo $users['userLastname']; ?>
+            <?php echo $users['agentFirstname']; ?>
+            <?php echo $users['agentMiddlename']; ?>
+            <?php echo $users['agentLastname']; ?>
         </p>      
     </div>
 

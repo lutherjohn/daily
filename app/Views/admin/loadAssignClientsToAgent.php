@@ -7,7 +7,7 @@
     <br />
     <p class="note note-primary">
         <strong>Agent Name:</strong>
-        <?php echo $users["userFirstname"] . " " . $users["userLastname"]; ?>
+        <?php echo $users["agentFirstname"] . " " . $users["agentLastname"]; ?>
         <br />
     </p>
     

@@ -36,9 +36,9 @@
             ?>
              <tr>
                 <td>
-                <?php echo $task['userFirstname']; ?> &nbsp; 
-                <?php echo $task['userMiddlename']; ?> &nbsp; 
-                <?php echo $task['userLastname']; ?> 	
+                <?php echo $task['agentFirstname']; ?> &nbsp; 
+                <?php echo $task['agentMiddlename']; ?> &nbsp; 
+                <?php echo $task['agentLastname']; ?> 	
                 </td>
                 <td><?php echo $task['date']; ?></td>
                 <td><?php echo $task['connectionRequestSent']; ?></td>

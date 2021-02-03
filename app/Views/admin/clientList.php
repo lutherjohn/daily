@@ -103,10 +103,7 @@ if(session()->has('message')){
             <div class="container">
             <div class ="row">
                 <form action="crudClients" method="post" class="row g-3">
-                    <div class="col-md-4">
-                        <label for="inputLastname" class="form-label">Lastname</label>
-                        <input type="text" name="lastname" class="form-control" id="inputLastname">
-                    </div>
+                    
                     <div class="col-md-4">
                         <label for="inputFirstname" class="form-label">Firstname</label>
                         <input type="text" name="firstname" class="form-control" id="inputFirstname">
@@ -114,6 +111,10 @@ if(session()->has('message')){
                     <div class="col-md-4">
                         <label for="inputMiddlename" class="form-label">Middlename</label>
                         <input type="text" name="middlename" class="form-control" id="inputMiddlename" placeholder="">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputLastname" class="form-label">Lastname</label>
+                        <input type="text" name="lastname" class="form-control" id="inputLastname">
                     </div>
                     <div class="col-md-6">
                         <label for="inputbusinessName" class="form-label">Business Name</label>
@@ -138,7 +139,7 @@ if(session()->has('message')){
                     <div class="col-12">
                         <label for="inputaccessLevels" class="form-label">Access Levels</label>
                         <br>
-                        <select name="userRoles" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <select name="userRules" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                             <option value="#"> Choose User Levels</option>
                             <?php foreach($accessLevels as $accessLevel): ?>
 

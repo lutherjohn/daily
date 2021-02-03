@@ -34,13 +34,13 @@
           <a class="nav-link active" aria-current="page" href="/pages/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/clients/clientList">Client</a>
+          <a class="nav-link" href="/admin/clientList">Client</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/agents/agentList">Agent</a>
+          <a class="nav-link" href="/admin/agentList">Agent</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/reports/reportList">Report</a>
+          <a class="nav-link" href="/admin/reportList">Report</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Log Out</a>

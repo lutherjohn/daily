@@ -6,13 +6,13 @@ use CodeIgniter\Database\Query;
 
 class AgentsModel extends Model{
 
-    protected $table = 'tblusers';
+    protected $table = 'tblagents';
 
-    protected $primaryKey = 'userId';
+    protected $primaryKey = 'agentId';
 
     protected $returnType = 'array';
     
-    protected $allowedFields = ["userId", "userLastname","userFirstname","userMiddlename","userEmailAddress", "userPassword"];
+    protected $allowedFields = ["agentId", "agentLastname","agentFirstname","agentMiddlename","agentEmailAddress"];
 
     protected $beforeInsert = ['beforeInsert'];
 
@@ -38,9 +38,9 @@ class AgentsModel extends Model{
 
     protected function passwordHash(array $data){
 
-        if(isset($data['data']['userPassword']))
+        if(isset($data['data']['agentPassword']))
 
-        $data['data']['userPassword'] = password_hash($data['data']['userPassword'], PASSWORD_DEFAULT);
+        $data['data']['agentPassword'] = password_hash($data['data']['agentPassword'], PASSWORD_DEFAULT);
 
 
         return $data;
@@ -52,7 +52,7 @@ class AgentsModel extends Model{
         return 
         $this->db->table("tblleadgen")
                 ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
-                ->join("tblusers", "tblusers.userId = tblleadgen.userId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
                 ->where("tbltasks.taskId", $id)
                 ->get()
                 ->getResultArray();

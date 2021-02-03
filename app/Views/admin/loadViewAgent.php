@@ -25,9 +25,9 @@
             ?>
             <tr>
                 <td>
-                <?php echo $agent['userFirstname']; ?> &nbsp; 
-                <?php echo $agent['userMiddlename']; ?> &nbsp; 
-                <?php echo $agent['userLastname']; ?> 	
+                <?php echo $agent['agentFirstname']; ?> &nbsp; 
+                <?php echo $agent['agentMiddlename']; ?> &nbsp; 
+                <?php echo $agent['agentLastname']; ?> 	
                 </td>
                 <td><?php echo $agent['date']; ?></td>
                 <td><?php echo $agent['connectionRequestSent']; ?></td>

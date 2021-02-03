@@ -11,7 +11,7 @@ class ClientsAgentModel extends Model{
 
     protected $returnType = 'array';
     
-    protected $allowedFields = ["assignclientId","userId", "clientsId"];
+    protected $allowedFields = ["assignclientId","agentId", "clientsId"];
 
 
     
@@ -19,9 +19,9 @@ class ClientsAgentModel extends Model{
 
         return
         $this->db->table("tblassignclients")
-                ->join("tblusers", "tblusers.userId = tblassignclients.userId","left")
+                ->join("tblagents", "tblagents.agentId = tblassignclients.agentId","left")
                 ->join("tblclients", "tblclients.clientsId = tblassignclients.clientsId","left")
-                ->where("tblusers.userId ", $id)
+                ->where("tblagents.agentId ", $id)
                 ->get()
                 ->getResultArray();
     }

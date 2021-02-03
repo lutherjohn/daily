@@ -14,7 +14,7 @@ class ReportsModel extends Model{
 
     protected $returnType = 'array';
     
-    protected $allowedFields = ['taskId','clientsId','userId','date','connectionRequestSent','totalLinkedInConnections','clicks'];
+    protected $allowedFields = ['taskId','clientsId','agentId','date','connectionRequestSent','totalLinkedInConnections','clicks'];
 
 
 
@@ -29,7 +29,7 @@ class ReportsModel extends Model{
         return $this->db
                 ->table("tblleadgen")
                 ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
-                ->join("tblusers", "tblusers.userId = tblleadgen.userId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
                 ->where("tbltasks.taskId", $id)
                 ->get()->getResultArray();
     }

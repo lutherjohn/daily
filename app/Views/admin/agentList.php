@@ -48,12 +48,12 @@ if(session()->has('message')){
                         ?>
                         <tr>
                             <th scope="row">
-                                <?php echo $agent['userId']; ?>
+                                <?php echo $agent['agentId']; ?>
                             </th>
-                            <td><?php echo $agent['userFirstname'] ." " .$agent['userMiddlename'] . " " . $agent['userLastname']; ?></td>
-                            <td><?php echo $agent['userEmailAddress']; ?></td>
+                            <td><?php echo $agent['agentFirstname'] ." " .$agent['agentMiddlename'] . " " . $agent['agentLastname']; ?></td>
+                            <td><?php echo $agent['agentEmailAddress']; ?></td>
                             <td>
-                                <a href= "<?php echo "editAgents/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Agent" >
+                                <a href= "<?php echo "editAgents/" .$agent['agentId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Agent" >
                                     <i class="fas fa-user-edit"></i>
                                 </a>  
                             </td>
@@ -63,12 +63,12 @@ if(session()->has('message')){
                                 </a>                                
                             </td> -->
                             <td>
-                                <a href= "<?php echo "clientAgentsData/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Client to Agent">
+                                <a href= "<?php echo "clientAgentsData/" .$agent['agentId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Client to Agent">
                                 <i class="fas fa-user-friends"></i>
                                 </a>                                
                             </td>
                             <td>
-                                <a href="<?php echo "getAssignClientsToAgents/" .$agent['userId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="View Agent Details">
+                                <a href="<?php echo "getAssignClientsToAgents/" .$agent['agentId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="View Agent Details">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
@@ -124,6 +124,21 @@ if(session()->has('message')){
                     <div class="col-6">
                         <label for="inputpassword" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control" id="inputpassword" placeholder="">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputaccessLevels" class="form-label">Access Levels</label>
+                        <br>
+                        <select name="userRules" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <option value="#"> Choose User Levels</option>
+                            <?php foreach($accessLevels as $accessLevel): ?>
+
+                                <option value="<?php echo $accessLevel['accesslevelsId']; ?>"><?php echo $accessLevel['accessLevels']; ?></option>
+
+
+                            <?php endforeach;?>
+
+                        </select>
+                        
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
