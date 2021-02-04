@@ -49,7 +49,12 @@ $routes->get('/admin/crudLeadGen/(:num)', 'Admin::crudLeadGen/$1');
 $routes->get('admin/viewTasksById/(:num)','Admin::viewTasksById/$1');
 $routes->get('admin/viewAgentsDetails/(:num)', 'Admin::viewAgentsDetails/$1');
 $routes->get('admin/clientAgentsData/(:num)', 'Admin::clientAgentsData/$1');
+$routes->get('agents/clientView', 'Agents::clientView');
+$routes->get('agents/clientListView', 'Agents::clientListView');
+$routes->get('agents/agentsDashboard', 'Agents::agentsDashboard');
+$routes->get('agents/getClientsToAgent/(:num)', 'Agents::getClientsToAgent/($1)');
 $routes->get('(:any)', 'Pages::showme/$1');
+
 
 /**
  * --------------------------------------------------------------------

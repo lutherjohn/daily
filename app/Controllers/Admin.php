@@ -153,7 +153,7 @@ class Admin extends BaseController{
 
 		$data = ([
 			'users' => $this->modelAgents->where('agentId', $id)->first(),
-			'clients' => $this->modelClientModel->orderby("clientsId", "DESC")->findAll()
+			'clients' => $this->modelClients->orderby("clientsId", "DESC")->findAll()
 		]);
 
 		echo view('templates/header', $data);
@@ -188,12 +188,12 @@ class Admin extends BaseController{
 	function getAssignClientsToAgents($id){
 		$data = ([
 			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($id),
-			"users" => $this->modelAgents->where('userId', $id)->first(),
+			"users" => $this->modelAgents->where('agentId', $id)->first(),
 			"title"=>"Agents with their Assign Client/s"
 
 		]);
 		echo view('templates/header', $data);
-		echo view('agents/loadAssignClientsToAgent');
+		echo view('admin/loadAssignClientsToAgent');
 		echo view('templates/footer');
 
     }

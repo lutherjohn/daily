@@ -36,7 +36,7 @@
 
         <div class="col-md-6">
             <label for="Select2"> Client/s Added</label>
-            <input type="hidden" name="users" value="<?php echo $users['userId']; ?>">
+            <input type="hidden" name="users" value="<?php echo $users['agentId']; ?>">
             <select name="multiple_assign2[]" size="15" multiple ="multiple" class="form-control" id="select2">
             </select>                
         

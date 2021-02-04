@@ -74,7 +74,7 @@
 
     function redirectTo(){
 
-        var url = "<?php echo base_url('agents/agentList'); ?>";
+        var url = "<?php echo base_url('admin/agentList'); ?>";
         window.location.href=url;
     }
     

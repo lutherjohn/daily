@@ -48,7 +48,7 @@
     });
 
     function redirectTo(){
-        var url = "<?php echo base_url('clients/clientList'); ?>";
+        var url = "<?php echo base_url('admin/clientList'); ?>";
         window.location.href=url;
     }
     
