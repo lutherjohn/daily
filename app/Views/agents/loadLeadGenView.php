@@ -59,9 +59,9 @@
     var id;
     function getId(id){
 
-        var url = "<?php echo base_url('agents/getLeadGenModal'); ?>";
+        var url = "<?php echo base_url('agents/getLeadGenModal/'); ?>"+id;
         
-        $( "#ph_modal" ).load( url + "/" +id, function() {
+        $( "#ph_modal" ).load( url, function() {
             console.log( id );
         }); 
 
