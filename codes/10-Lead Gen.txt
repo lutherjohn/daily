@@ -23,8 +23,7 @@
                     foreach($tasks as $task){
                 ?>
                 <!----->
-            <?php?>
-               <tr data-toggle="modal" href="<?php echo base_url('agents/getLeadGenModal/'.$task['taskId']); ?>"  data-target="#loadLeadGenModal" style = "cursor:pointer">
+               <tr onclick="getTaskId(<?php echo $task['taskId']; ?>)" style = "cursor:pointer">
                     <td><?php echo $task["tasks"]; ?></td>
                     <td>
                         <button class="btn btn-primary" 
@@ -33,19 +32,8 @@
                         </button>
                         
                     </td>
-                </tr>
-                <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-                        <script type="text/javascript">
-                           $(document).ready(function(){
-                              $('body').on('hidden.bs.modal', '.modal', function () {
-                                $(this).removeData('bs.modal');
-                                $("#" + $(this).attr("id") + " .modal-content").empty();
-                                $("#" + $(this).attr("id") + " .modal-content").append("Loading...");
-                              });
-                            });
-                        </script>
-            <?php       
 
+               <?php 
                     }
                
                 } 
@@ -58,11 +46,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="loadLeadGenModal" tabindex="-1" aria-labelledby="loadloadLeadGenModalLabel" aria-hidden="true">
+<div class="modal fade" id="loadAgentModal" tabindex="-1" aria-labelledby="loadAgentLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="loadLeadGenModalLabel">Add Lead Gen</h5>
+        <h5 class="modal-title" id="loadAgentLabel">Add Lead Gen</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

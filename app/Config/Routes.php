@@ -53,6 +53,7 @@ $routes->get('agents/clientView', 'Agents::clientView');
 $routes->get('agents/clientListView', 'Agents::clientListView');
 $routes->get('agents/agentsDashboard', 'Agents::agentsDashboard');
 $routes->get('agents/getClientsToAgent/(:num)', 'Agents::getClientsToAgent/($1)');
+$routes->get('agents/getLeadGenModal/(:num)', 'Agents::getLeadGenModal/$1');
 $routes->get('(:any)', 'Pages::showme/$1');
 
 

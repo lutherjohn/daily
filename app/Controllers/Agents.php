@@ -84,8 +84,17 @@ class Agents extends BaseController{
 		echo view('agentTemplate/header',$data);
 		echo view('agents/loadLeadGenView');
 		echo view('agentTemplate/footer');
+	}
 
+	function getLeadGenModal($id){
 
+		$data = ([
+			"tasks" => $this->modelTasks->where("taskId", $id)->first()
+		]);
+
+		echo view('agentTemplate/header',$data);
+		echo view('agents/loadLeadGenView');
+		echo view('agentTemplate/footer');
 
 	}
 
