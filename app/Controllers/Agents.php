@@ -74,13 +74,11 @@ class Agents extends BaseController{
 
 		$data = ([			
 			"title" => "Lead Generation",
-			"clients" => $this->modelClients->where("clientsId", $id)->first(),
+			"client" => $this->modelClients->where("clientsId", $id)->first(),
 			"tasks" => $this->modelTasks->orderby("taskId", "ASC")->findAll()
 		]);
 
-		//"clients" => $this->modelClients->where("clientsId", $id)->first()
-		//"users" => $this->modelAgents->where('agentId', $id)->first()
-
+		
 		echo view('agentTemplate/header',$data);
 		echo view('agents/loadLeadGenView');
 		echo view('agentTemplate/footer');
@@ -92,7 +90,24 @@ class Agents extends BaseController{
 			"tasks" => $this->modelTasks->where("taskId", $id)->first(),
 			"title" => "Add Lead Gen"
 		]);		
-		echo view('agents/loadLeadGenModal',$data);
+		echo view('agents/loadLeadGenModal',$data[0]);
+	}
+
+	function InserLeadGenDetails(){
+
+		$postData = $this->request->getPost();
+
+		$this->modelAgentViewModel->save([
+			"agentId"=> 2,
+			"taskId" => $postData['getTaskId'],
+			"clientsId" => $postData['getClientId'],
+			"date" => $postData['date'],
+			"connectionRequestSent" => $postData['connectionRequest'],
+			"totalLinkedInConnections" => $postData['totalLinkedInConnections'] ,
+			"clicks" => $postData['clicks']
+		]);
+
+		return redirect()->to('clientView');
 	}
 
 

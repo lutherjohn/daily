@@ -9,7 +9,7 @@
                     </p> 
                 </div>
             </div>
-            <?php echo form_open ('agents/updateAgents'); ?>
+            <?php echo form_open ('admin/updateAgents'); ?>
                 <div class="col-md-3">                
                     <label for="inputLastname" class="form-label">Lastname</label>
                     <input type="text" name="updateLastname" class="form-control" id="inputLastname" value="<?php echo $users['agentLastname']; ?>">

@@ -22,7 +22,7 @@
                     <tr>
                         <td><?php echo $client['clientsLastname'] ." " .$client['clientsFirstname'] ; ?></td>
                         <td>
-                            <a href="<?php echo "getClientsToAgent/" .$client['clientsId']; ?>"data-bs-toggle="tooltip" data-bs-placement="top" title="View Agent Details">
+                            <a href="<?php echo "getClientsToAgent/" .$client['clientsId']; ?>"data-bs-toggle="tooltip" data-bs-placement="top" title="Select Client">
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>

@@ -34,7 +34,7 @@ class Admin extends BaseController{
 		helper('form', 'database');
     }
 
-    #region Agent
+    #region Agent Start
     function agentList(){
 		//
         $data = ([
@@ -196,7 +196,9 @@ class Admin extends BaseController{
 		echo view('admin/loadAssignClientsToAgent');
 		echo view('templates/footer');
 
-    }
+	}
+	
+	#region Agent Ends
     
     #region Clients
 
@@ -264,16 +266,19 @@ class Admin extends BaseController{
 
 	function updateClients(){
 
-		$postData = $this->request->getPOst();
+		$postData = $this->request->getPost();
 
 		$updateClientId = $this->request->getPost("updateClientId");
 
-		$data = [
+		$data = ([
 			"clientsFirstname" => $postData['updateFirstname'],
 			"clientsMiddlename" =>$postData['updateMiddlename'],
 			"clientsLastname" => $postData['updateLastname'],
+			"clientsBussinessName" =>$postData['updateBussinessName'],
+			"clientsCampaignGoals" =>$postData['updateCampaignGoals'],
+			"clientsJointVenture" => $postData['updateJointVenture'],
 			"clientsEmailAddress" =>$postData['updateEmail']
-		];
+		]);
 
 		$this->modelClients->update($updateClientId , $data);
 

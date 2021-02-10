@@ -7,8 +7,9 @@
 
             <p>
                 <?php 
-                //echo $client['clientsFirstname']; 
-                var_dump($client);
+                
+                //echo ['clientsId']; 
+                var_dump($clients);
                 ?>
             </p>
 
@@ -21,6 +22,8 @@
                <?php 
                     }else{
                     foreach($tasks as $task){
+
+
                 ?>
                 <!--
                
@@ -60,7 +63,7 @@
         <section>
             <div class="container">
             <div class ="row">
-                <?php var_dump($client); ?>
+                <?php var_dump($clients); ?>
                 <div id="response"></div>
                 <form action="" method="post" class="row g-3">
                     <div class="col-md-6">
@@ -78,8 +81,6 @@
                     <div class="col-12">
                         <label for="inputClicks" class="form-label">Clicks</label>
                         <input type="text" name="clicks" class="form-control" id="inputClicks" placeholder="">
-                        <input type="hidden" name="getTaskId" class="form-control" id="getTaskId" value="<?php echo 4;?>">
-                        <input type="hidden" name="getClientId" class="form-control" id="getClientId" value="<?php echo 5;?>">
                     </div>
                     <div class="col-12">
                         <button type="button" onclick="saveLeadGenDetails()" class="btn btn-primary">Submit</button>                         
@@ -98,14 +99,14 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-    $('table tr').each(function (a, b) {
-        $(b).click(function () {
-            $('table tr').css('background', '#ffffff');
-            $(this).css('background', 'lightgray');
-        });
-    });
-
-
+    $( document ).ready(function() {
+                                        
+    }); 
+    /* 
+    $('tr').click(function() {
+        $('#loadLeadGenModal').modal('show');
+    }); 
+    */
     var id = 0;
     function getId(id){
         $('#loadLeadGenModal').modal('show'); 
@@ -125,18 +126,17 @@
             data: $('form').serialize(),
             type: "POST",
             success: function () {
-                $('#response').html('<div class="alert alert-success" role="alert">Added SuccessFully!!!</div>'); 
+                $('#response').html('<span class="text-info">Added SuccessFully!!!</span>'); 
                 setTimeout(function(){  
                     $('#response').fadeOut("slow"),
                     window.location.reload();  
                 }, 2500);  
             },
             error: function (xhr, statusText, ex) {
-                //error code here...
+                //var responseModel = JSON.parse(xhr.responseText);
+                //alert(responseModel.StatusText);
             }
         }); 
-
-        console.log(getClientId);
 
     } 
     

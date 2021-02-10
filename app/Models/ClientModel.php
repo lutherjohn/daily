@@ -10,17 +10,6 @@ class ClientModel extends Model{
 
     protected $returnType = 'array';
 
-    protected $allowedFields = ["clientsId","clientsFirstname","clientsMiddlename", "clientsLastname","clientsBusinessName","clientsCampaignGoals","clientsDateStarted","clientsJointVenture","clientsEmailAddress"];
-
-    //protected $beforeInsert = ['beforeInsert'];
-
-    //protected $beforeUpdate = ['beforeUpdate'];
-    
-
-
-  
-
-
-
+    protected $allowedFields = ["clientsId","clientsFirstname","clientsMiddlename", "clientsLastname","clientsBussinessName","clientsCampaignGoals","clientsDateStarted","clientsJointVenture","clientsEmailAddress"];
 
 }

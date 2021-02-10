@@ -1,0 +1,71 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <h1><?php echo $title; ?></h1>
+        </div>
+        <div class="row">
+            <p>
+                <?php 
+                
+                //echo ['clientsId']; 
+                //var_dump($clients);
+                ?>
+            </p>
+
+            <table class="table">
+                <?php if($tasks == null){ ?>
+                <tr>            
+                    <td>No Data</td>
+                    <td>Option</td>                  
+                </tr>
+               <?php 
+                    }else{
+
+                    for($i=0 ; $i < count($tasks); ++$i):
+                ?>
+                <!----->
+            <?php ?>
+               <tr data-bs-toggle="modal" onclick="getId(<?php echo $tasks[$i]->taskId; ?>)" data-bs-target="#loadLeadGenModal" style = "cursor:pointer">
+                    <td>
+                        <?php echo $tasks[$i]->tasks; ?>
+                        <?php echo $i ?>
+                    </td>
+                </tr>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script type="text/javascript">
+                    var id;                    
+                    function getId(id){
+
+                        var url = "<?php echo base_url('agents/getLeadGenModal/'); ?>"+id;                        
+                        $( "#ph_modal" ).load( url, function() {
+                            $('#loadLeadGenModal').modal('show'); 
+                            console.log( id );
+                        }); 
+
+                    }
+                    
+
+                </script>
+            <?php       
+                        endfor;
+                  
+               
+                } 
+               
+               ?>
+            </table>
+            <div id="ph_modal">
+            </div>
+        </div>
+    </div>
+    
+
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+<?php echo base_url().'agents/getLeadGenModal/'. $task['taskId']; ?> =>working 101
+
+
+</script>

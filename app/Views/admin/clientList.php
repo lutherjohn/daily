@@ -1,3 +1,4 @@
+<div id="response">
 <?php
 // Display Response 
 if(session()->has('message')){
@@ -9,6 +10,8 @@ if(session()->has('message')){
 }
 
 ?>
+</div>
+
 <br/>
 <section> 
     <div class="container px-4">
