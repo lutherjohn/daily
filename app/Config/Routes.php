@@ -52,9 +52,10 @@ $routes->get('admin/clientAgentsData/(:num)', 'Admin::clientAgentsData/$1');
 $routes->get('agents/clientView', 'Agents::clientView');
 $routes->get('agents/clientListView', 'Agents::clientListView');
 $routes->get('agents/agentsDashboard', 'Agents::agentsDashboard');
-$routes->get('agents/getClientsToAgent/(:num)', 'Agents::getClientsToAgent/($1)');
+$routes->get('agents/getClientsToAgent/(:num)', 'Agents::getClientsToAgent/$1');
 $routes->get('agents/getLeadGenModal/(:num)', 'Agents::getLeadGenModal/$1');
 $routes->get('agents/InserLeadGenDetails', 'Agents::InserLeadGenDetails');
+$routes->get('agents/getLeadGenByTasksId/(:num)', 'agents::getLeadGenByTasksId/$1');
 $routes->get('agents/loadModal', 'Agents::loadModal');
 $routes->get('(:any)', 'Pages::showme/$1');
 

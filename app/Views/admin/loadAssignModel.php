@@ -1,6 +1,6 @@
 <br />
 <section class="container">
-  <?php echo form_open('agents/addAssignClients');?>
+  <?php echo form_open('admin/addAssignClients');?>
     <div class="p-3">
         <p class="note note-primary">
         <strong>Agent Name:</strong>

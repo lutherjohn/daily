@@ -17,6 +17,7 @@ class Agents extends BaseController{
 	public $modelAccessLevel;
 	public $modelAccountModel;
 	public $modelTasks;
+	public $reportsModel;
 
 
 	public function __construct(){
@@ -28,13 +29,15 @@ class Agents extends BaseController{
 		$this->modelAccessLevel = new AccessLevelModel();
 		$this->modelAccountModel = new AccountsModel();
 		$this->modelTasks = new TasksModel();
+		$this->reportsModel = new ReportsModel();
 
 		helper('form', 'database');
 	}
 
 	function agentsDashboard(){
 		$data = ([
-			"title" => "Agents Dashboard"
+			"title" => "Agents Dashboard",
+			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll()
 		]);
 
 		echo view('agentTemplate/header', $data);
@@ -84,14 +87,18 @@ class Agents extends BaseController{
 		echo view('agentTemplate/footer');
 	}
 
-	function getLeadGenModal($id){
+	function getLeadGenByTasksId($id){
 
 		$data = ([
 			"tasks" => $this->modelTasks->where("taskId", $id)->first(),
 			"title" => "Add Lead Gen"
-		]);		
-		echo view('agents/loadLeadGenModal',$data[0]);
+		]);	
+
+		echo view('agentTemplate/header',$data);	
+		echo view('agents/loadLeadGenModal');
+		echo view('agentTemplate/footer');
 	}
+
 
 	function InserLeadGenDetails(){
 
@@ -100,15 +107,21 @@ class Agents extends BaseController{
 		$this->modelAgentViewModel->save([
 			"agentId"=> 2,
 			"taskId" => $postData['getTaskId'],
-			"clientsId" => $postData['getClientId'],
+			"clientsId" => 6,
 			"date" => $postData['date'],
 			"connectionRequestSent" => $postData['connectionRequest'],
 			"totalLinkedInConnections" => $postData['totalLinkedInConnections'] ,
 			"clicks" => $postData['clicks']
 		]);
 
-		return redirect()->to('clientView');
+		return redirect()->to('agentsDashboard');
+
+		/* echo view('agentTemplate/header',$data);
+		echo view('agents/loadLeadGenView');
+		echo view('agentTemplate/footer'); */
 	}
+
+
 
 
 

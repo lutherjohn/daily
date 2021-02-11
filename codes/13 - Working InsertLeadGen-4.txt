@@ -1,0 +1,96 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <h1><?php echo $title; ?></h1>
+        </div>
+        <div class="row">
+
+            <p>
+                <?php 
+                echo $client['clientsFirstname']; 
+                //var_dump($client);
+                ?>
+            </p>
+
+            <table class="table">
+                <thead>            
+                    <th>Tasks</th>
+                    <th>Option</th>                  
+                </thead>
+
+                <?php if($tasks == null){ ?>
+                <tr>            
+                    <td>No Data</td>
+                    <td>Option</td>                  
+                </tr>
+               <?php 
+                    }else{
+                    foreach($tasks as $task){
+                ?>
+                <!--
+               
+                    --->
+            <?php ?>
+               <tr style = "cursor:pointer">
+                    <td>
+                        <?php echo $task["tasks"]; ?>
+                        
+                    </td>
+                    <td>
+                        <?php echo form_open();?>
+                            <input type="hidden" name="getClientId" value ="<?php echo $client['clientsId'];?>">
+                            <input type="hidden" name="getAgentId" value ="<?php echo 3 ;?>">
+                            <button type="button" onclick="saveLeadGenDetails(<?php echo $task['taskId']; ?>)" class="btn btn-primary"> Select </button>
+                        <?php echo form_close(); ?>
+                    </td>
+                </tr>
+              
+            <?php       
+                        
+                    }
+               
+                } 
+               
+               ?>
+            </table>
+            
+        </div>
+    </div>
+    
+
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+      /**/ 
+
+    function saveLeadGenDetails(getTaskId){ 
+
+        //$('#getTaskId').text(getClientId);
+        //$('form').serialize()
+
+        var url = "<?php echo base_url() . "/agents/InserLeadGenDetails/" ;?>" + getTaskId;
+        
+        $.ajax({
+            url: url,
+            data: $(['getClientId', 'getAgentId', 'getTaskId']),
+            type: "POST",
+            success: function () {
+                $('#response').html('<span class="text-info">Added SuccessFully!!!</span>'); 
+                setTimeout(function(){  
+                    $('#response').fadeOut("slow"),
+                    window.location.reload();  
+                }, 2500);  
+            },
+            error: function (xhr, statusText, ex) {
+                //var responseModel = JSON.parse(xhr.responseText);
+                //alert(responseModel.StatusText);
+            }
+        }); 
+
+        console.log("button click");
+
+    } 
+
+    
+    
+</script>
