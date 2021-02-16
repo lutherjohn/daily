@@ -1,0 +1,80 @@
+if($this->request->getMethod() == 'post'){
+
+	$rules = [
+		'email' => 'required|min_length[3]|max_length[25]|valid_email',
+		'password' => 'required|min_length[3]|max_length[255]|validateUser[email,password]'
+	];
+
+	$errors = [
+		'password' => [
+			'validateUser' => "Email or Password don\'t match"
+		]
+	];
+
+/**/ 	
+	if(! $this->validate($rules, $errors)){
+		
+		$data['validation'] = $this->validator;
+
+	}else{
+
+		$user = $this->accountModel->where('accountEmail', $this->request->getPost('email'))
+									->first();
+
+		$this->setUserSession($user);
+
+		return redirect()->to('dashboard');
+
+	} 
+
+}
+
+=====================================================================================================
+
+			$rules = [
+				'email' => 'required|min_length[3]|max_length[25]|valid_email',
+				'password' => 'required|min_length[3]|max_length[255]|validateUser[accountEmail,password]'
+			];
+
+			$errors = [
+				'password' => [
+					'validateUser' => "Email or Password don\'t match"
+				]
+			];
+
+		/**/ 	
+			if(! $this->validate($rules, $errors)){
+				
+				$data['validation'] = $this->validator;
+
+			}else{
+
+				$user = $this->accountModel->where('accountEmail', $this->request->getPost('email'))
+											->first();
+
+				$this->setUserSession($user);
+
+				return redirect()->to('dashboard');
+
+			} 
+			
+			
+===========================================================================
+
+public function validateUser(string $str, string $fields, array $data){
+        
+        
+        $model = new AccountsModel();
+
+        $user = $model->where('accountEmail', $data['email'] )
+                    ->first();
+
+
+        if(!$user){
+            return false;
+
+            return password_verify($data['password'], $user['accountPassword']);
+
+        }
+
+    }

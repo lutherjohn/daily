@@ -24,26 +24,17 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="/admin/adminDashboard">DAS</a>
+    <a class="navbar-brand" href="/clients/clientDashboard">DAS</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/admin/adminDashboard">Dashboard</a>
+          <a class="nav-link active" aria-current="page" href="/clients/clientDashboard">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/clientList">Client</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/agentList">Agent</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/reportList">Report</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/logout">Log Out</a>
+          <a class="nav-link" href="/clients/logout">Log Out</a>
         </li>
       </ul>
     </div>

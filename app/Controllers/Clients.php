@@ -23,6 +23,30 @@ class Clients extends BaseController
 
 	}
 
+	function clientDashboard(){
+		$session = session();
+		$sessionEmail = $session->get("accountEmail");
+
+        $data = ([
+			"title" => "Client Page",
+			'user' => $this->clientsModel->where("clientsEmailAddress", $sessionEmail)->first()		
+		]);	
+
+		echo view('clientTemplates/header', $data);
+		echo view('clients/clientsDashboard');
+        echo view('clientTemplates/footer');  
+	}
+
+	#log Out Session
+	#LogOut Session
+	function logout(){
+
+        $session = session();
+        $session->destroy();
+		return redirect()->to('/');
+		
+    }
+
     
 
 

@@ -1,0 +1,47 @@
+function loginValidation(){
+
+		$data = ([
+			"title" => "O2O Daily Activity System"
+		]);
+
+		helper(['form']);
+
+		if($this->request->getMethod() == 'post'){
+
+			$session = session();
+			$email =  $this->request->getPost('email');
+			$password =  $this->request->getPost('password');
+			$data = $this->accountModel->where('accountEmail', $email)->first();
+
+
+			if($data){
+				$pass = $data["accountPassword"];
+				$verify_password = password_verify($password, $pass);
+				if($verify_password){
+					$ses_data = [
+						"accountId" => $data["accountId"],
+						"accountEmail" =>$data["accountEmail"],
+						"accountStatus" => 1
+					];
+					$session->set($ses_data);
+					return redirect()->to('dashboard');
+				}else{
+					$session->setFlashdata("message", "Wrong Password");
+					session()->setFlashdata('alert-class', 'alert-danger');
+					return redirect()->to('/');
+				}
+
+			}else{
+				$session->setFlashdata("message", "Email Not Found");
+				session()->setFlashdata('alert-class', 'alert-danger');
+				return redirect()->to('/');
+
+			}
+
+		}
+
+		/* echo view('LoginTemplates/header', $data);
+		echo view('pages/login');
+		echo view('LoginTemplates/footer');
+ 		*/
+	}

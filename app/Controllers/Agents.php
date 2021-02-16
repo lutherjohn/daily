@@ -35,15 +35,28 @@ class Agents extends BaseController{
 	}
 
 	function agentsDashboard(){
+		$session = session();
+		$sessionEmail = $session->get("accountEmail");
+
 		$data = ([
 			"title" => "Agents Dashboard",
-			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll()
+			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll(),
+			'agent' => $this->modelAgents->where("agentEmailAddress", $sessionEmail)->first()
 		]);
 
 		echo view('agentTemplate/header', $data);
 		echo view('agents/loadAgentsDashboard');
 		echo view('agentTemplate/footer');
 	}
+
+	#LogOut Session
+	function logout(){
+
+        $session = session();
+        $session->destroy();
+		return redirect()->to('/');
+		
+    }
 
 
 	function clientView(){
@@ -61,7 +74,7 @@ class Agents extends BaseController{
 
 		$data = ([
 			"title" => "Select your Client",
-			"clients" => $this->modelClients->orderby("clientsId", "ASC")->findAll()
+			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent("agentId", 2)
 		]);
 
 		

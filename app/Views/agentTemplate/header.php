@@ -37,7 +37,7 @@
           <a class="nav-link" href="/agents/clientListView">Client</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Log Out</a>
+          <a class="nav-link" href="/agents/logout">Log Out</a>
         </li>
       </ul>
     </div>

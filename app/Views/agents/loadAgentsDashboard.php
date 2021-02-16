@@ -4,7 +4,9 @@
             <h1><?php echo $title; ?></h1>
         </div>
         <div class="row">
-       
+       <p>
+            <?php echo $agent["agentLastname"] . " , " . $agent["agentFirstname"]; ?>
+       </p>
         <br>
         <table class="table table-bordered">
             <tr>

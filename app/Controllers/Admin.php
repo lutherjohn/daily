@@ -32,7 +32,35 @@ class Admin extends BaseController{
 		$this->tasksModel = new TasksModel();
 
 		helper('form', 'database');
+	}
+	
+	#Admin Dashboard
+	function adminDashboard(){
+		
+		$session = session();
+		$sessionEmail = $session->get("accountEmail");
+
+		$data = ([
+			'agents' => $this->modelAgents->countAll(),
+			'clients' => $this->modelClients->countAll(),
+			'user' => $this->modelClients->where("clientsEmailAddress", $sessionEmail)->first()
+		]);
+
+
+		echo view('templates/header', $data);
+		echo view('admin/adminDashboard');
+		echo view('templates/footer');
+	}
+
+	#LogOut Session
+	function logout(){
+
+        $session = session();
+        $session->destroy();
+		return redirect()->to('/');
+		
     }
+
 
     #region Agent Start
     function agentList(){
@@ -350,13 +378,8 @@ class Admin extends BaseController{
 		
 
 	}
-    
 
 
-
-
-
-
-
+	
 
 }
