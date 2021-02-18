@@ -1,43 +1,63 @@
 <section>
     <div class="container">
         <div class="row">
-            <h1><?php echo $title; ?></h1>
+            <h1>
+                Welcome: &nbsp; 
+                <?php 
+                    echo $agent; 
+                    foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
+                    foreach($totalLinkedInConnections as $i){ $linkedinConnections =  $i['totalLinkedInConnections']; }
+                    foreach($totalclicks as $click){ $clicks =  $click['clicks']; }
+                ?>
+            </h1>
         </div>
         <div class="row">
-       <p>
-            <?php echo $agent["agentLastname"] . " , " . $agent["agentFirstname"]; ?>
-       </p>
+        <p class="note note-primary">
+            <strong>
+                Task: 
+                <?php 
+                    echo "Lead Generator Daily Activity";
+                    //var_dump($leadGens);
+                ?>
+            </strong>
+        </p>
         <br>
         <table class="table table-bordered">
-            <tr>
-                <td>Date</td>
-                <td>Connection Request</td>
-                <td>Total LinkedIn Connections</td>
-                <td>Clicks</td>
-            </tr>
+            <thead>
+                <th>Date</th>
+                <th>Total Connection Request Sent</th>
+                <th>Total LinkedIn Connections</th>
+                <th>Clicks</th>
+            </thead>
             <?php
-                if($users == null){
+            
+                foreach($tasks as $task){
             ?>
             <tr>
-                <td colspan="4">No Data</td>
+                <td><?php echo $task['date'];?></td>
+                <td><?php echo $task['connectionRequestSent'];?></td>
+                <td><?php echo $task['totalLinkedInConnections'];?></td>
+                <td><?php echo $task['clicks'];?></td>
             </tr>
             <?php
-
-                }else{
-                    foreach($users as $user){
-            ?>
-                <tr>
-                        <td><?php echo $user['date'];?></td>
-                        <td><?php echo $user['connectionRequestSent'];?></td>
-                        <td><?php echo $user['totalLinkedInConnections'];?></td>
-                        <td><?php echo $user['clicks'];?></td>
-                </tr>
-            <?php
-                    }
 
                 }
-            
             ?>
+            
+            <tr>
+                <td>
+                
+                </td>
+                <td>
+                    <?php echo $TotalConnectionRequestSent; ?>
+                </td>
+                <td>
+                    <?php echo $linkedinConnections; ?>
+                </td>
+                <td>
+                    <?php echo $clicks; ?>
+                </td>
+            </tr>
         </table>
         </div>
     </div>

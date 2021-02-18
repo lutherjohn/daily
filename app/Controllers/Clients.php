@@ -38,7 +38,7 @@ class Clients extends BaseController
 	}
 
 	#log Out Session
-	#LogOut Session
+
 	function logout(){
 
         $session = session();

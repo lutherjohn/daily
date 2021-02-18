@@ -34,12 +34,25 @@
                     <div class="col-sm-6">
                         <div class="row">           
                             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                            <div class="card-header">Users</div>
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text">
+                                    <!----count Users here php-->
+                                    <?php echo $clients; ?>
+                                </p>
+                            </div>
+                            </div>
+                        </div> 
+
+                        <div class="row">           
+                            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                             <div class="card-header">Clients</div>
                             <div class="card-body">
                                 <h5 class="card-title"></h5>
                                 <p class="card-text">
                                     <!----count clients here php-->
-                                    <?php echo $clients; ?>
+                                    <?php echo $countClients; ?>
                                 </p>
                             </div>
                             </div>

@@ -57,6 +57,7 @@ $routes->get('agents/clientListView', 'Agents::clientListView',['filter' =>'auth
 $routes->get('agents/getClientsToAgent/(:num)', 'Agents::getClientsToAgent/$1',['filter' =>'auth']);
 $routes->get('agents/getLeadGenModal/(:num)', 'Agents::getLeadGenModal/$1',['filter' =>'auth']);
 $routes->get('agents/InserLeadGenDetails', 'Agents::InserLeadGenDetails',['filter' =>'auth']);
+$routes->get('agents/InsertTaskById/(:num)', 'Agents::InsertTaskById/$1');
 $routes->get('agents/getLeadGenByTasksId/(:num)', 'agents::getLeadGenByTasksId/$1',['filter' =>'auth']);
 $routes->get('agents/loadModal', 'Agents::loadModal',['filter' =>'auth']);
 $routes->get('agents/logout', 'Agents::logout');

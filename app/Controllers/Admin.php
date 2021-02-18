@@ -43,7 +43,8 @@ class Admin extends BaseController{
 		$data = ([
 			'agents' => $this->modelAgents->countAll(),
 			'clients' => $this->modelClients->countAll(),
-			'user' => $this->modelClients->where("clientsEmailAddress", $sessionEmail)->first()
+			'user' => $this->modelClients->where("clientsEmailAddress", $sessionEmail)->first(),
+			'countClients'=> $this->accountModel->where("accesslevelsId", 4)->countAll()
 		]);
 
 

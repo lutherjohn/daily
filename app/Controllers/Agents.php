@@ -7,6 +7,7 @@ use App\Models\ClientsAgentModel;
 use App\Models\AccessLevelModel;
 use App\Models\AccountsModel;
 use App\Models\TasksModel;
+use App\Models\AssignLeadGenModel;
 
 class Agents extends BaseController{	
 
@@ -18,6 +19,9 @@ class Agents extends BaseController{
 	public $modelAccountModel;
 	public $modelTasks;
 	public $reportsModel;
+	public $sessionEmail;
+	public $modelAssignLeadGen;
+	public $db;
 
 
 	public function __construct(){
@@ -30,18 +34,29 @@ class Agents extends BaseController{
 		$this->modelAccountModel = new AccountsModel();
 		$this->modelTasks = new TasksModel();
 		$this->reportsModel = new ReportsModel();
-
+		$this->modelAssignLeadGen = new AssignLeadGenModel();
+		$session = session();
+		$this->sessionEmail = $session->get("accountEmail");
+		$this->db = \Config\Database::connect();
 		helper('form', 'database');
 	}
 
-	function agentsDashboard(){
-		$session = session();
-		$sessionEmail = $session->get("accountEmail");
+	function agentsDashboard(){		
+
+		$agentById = $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first();
+		//"agent" => $this->modelAgents-where("agentId", $agentById["agentId"])->first()
+		//$agentById["agentFirstname"] ." " . $agentById["agentLastname"]
+		//$this->reportsModel->sumConnectionRequestSent()
 
 		$data = ([
 			"title" => "Agents Dashboard",
 			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll(),
-			'agent' => $this->modelAgents->where("agentEmailAddress", $sessionEmail)->first()
+			"agent"=>$agentById["agentFirstname"] ." " . $agentById["agentLastname"],
+			"leadGens" =>$this->modelAssignLeadGen->getLeadGenByAgentId($agentById["agentId"]),
+			"tasks" => $this->reportsModel->getTaksById(1),
+			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
+			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1)
 		]);
 
 		echo view('agentTemplate/header', $data);
@@ -72,12 +87,13 @@ class Agents extends BaseController{
 
 	function clientListView(){
 
-		$data = ([
-			"title" => "Select your Client",
-			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent("agentId", 2)
-		]);
+		$agentId = $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first();
 
-		
+		$data = ([
+			"title" => "Client Assigned",
+			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($agentId['agentId']),
+			
+		]);		
 
 		echo view('agentTemplate/header',$data);
 		echo view('agents/loadClientListView');
@@ -91,7 +107,8 @@ class Agents extends BaseController{
 		$data = ([			
 			"title" => "Lead Generation",
 			"client" => $this->modelClients->where("clientsId", $id)->first(),
-			"tasks" => $this->modelTasks->orderby("taskId", "ASC")->findAll()
+			"tasks" => $this->modelTasks->orderby("taskId", "ASC")->findAll(),
+			"agentName"=> $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first()
 		]);
 
 		
@@ -100,11 +117,34 @@ class Agents extends BaseController{
 		echo view('agentTemplate/footer');
 	}
 
+	function InsertTaskById($getTaskId){
+	
+			$this->modelAssignLeadGen->save([
+				"agentId" => $this->request->getPost("getAgentId"),
+				"clientId" =>$this->request->getPost("getClientId"),
+				"taskId"=> $getTaskId
+			]);
+
+		//return redirect()->to('agentsDashboard');
+	}
+
 	function getLeadGenByTasksId($id){
 
+		$leadGens =$this->modelAssignLeadGen->getLeadGenId($id);
+
+		foreach($leadGens as $leadGen){
+
+			$aId = $leadGen["agentId"];
+			$cId = $leadGen["clientId"];
+
+		}
+
 		$data = ([
+			"title" => "Add Lead Gen",
 			"tasks" => $this->modelTasks->where("taskId", $id)->first(),
-			"title" => "Add Lead Gen"
+			"agent" => $this->modelAgents->where("agentId", $aId)->first(),
+			"client"=>$this->modelClients->where("clientsId", $cId)->first()
+			
 		]);	
 
 		echo view('agentTemplate/header',$data);	
@@ -118,9 +158,9 @@ class Agents extends BaseController{
 		$postData = $this->request->getPost();
 
 		$this->modelAgentViewModel->save([
-			"agentId"=> 2,
+			"agentId"=> $postData['getAgentId'],
 			"taskId" => $postData['getTaskId'],
-			"clientsId" => 6,
+			"clientsId" => $postData['getClientId'],
 			"date" => $postData['date'],
 			"connectionRequestSent" => $postData['connectionRequest'],
 			"totalLinkedInConnections" => $postData['totalLinkedInConnections'] ,

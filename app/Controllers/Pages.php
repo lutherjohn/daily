@@ -70,17 +70,19 @@ class Pages extends BaseController
 						"accountStatus" => 1
 					];
 					if($accessLevel == 1){
+						//Admin Page
 						$session->set($ses_data);
 						return redirect()->to('/admin/adminDashboard');
 
 					}else if($accessLevel == 2){
+						//Agents Page
 						$session->set($ses_data);
 						return redirect()->to('/agents/agentsDashboard');
 
 					}else if($accessLevel == 3){
 
 					}else if($accessLevel == 4){
-
+						//Clients Page
 						$session->set($ses_data);
 						return redirect()->to('/clients/clientDashboard');
 					}

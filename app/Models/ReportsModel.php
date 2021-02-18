@@ -7,6 +7,8 @@ use CodeIgniter\Database\ConnectionInterface;
 
 class ReportsModel extends Model{
 
+    //$db = \Config\Database::connect();
+
 
     protected $table = 'tblleadgen';
 
@@ -35,13 +37,57 @@ class ReportsModel extends Model{
     }
 
 
-    function sumConnectionRequestSent(){
-        /* return $this->db
-                    ->select("SUM(connectionRequestSent) as totalRequest")
-                    ->table("tblleadgen")
-                    ->orderby("connectionRequestSent", "DESC")
-                    ->get();   */
+    function sumConnectionRequestSent(){       
+        /*Sum all connectionRequestSent  */ 
+        return 
+        $this->db
+                ->table('tblleadgen')
+                ->selectSum('connectionRequestSent','totalConnection')
+                ->groupby('connectionRequestSent')                
+                ->get()
+                ->getResultArray();
+    }
 
+    function sumConnectionRequestSentByTaskId($tId){       
+        /*Sum of connectionRequestSent by TaskId  */ 
+        return 
+        $this->db
+                ->table('tblleadgen')
+                ->selectSum('tblleadgen.connectionRequestSent','totalConnection')
+                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+                ->where("tbltasks.taskId", $tId)
+                ->groupby('connectionRequestSent')                
+                ->get()
+                ->getResultArray();
+    }
+
+    function sumtotalLinkedinConnectionsTaskId($Id){       
+        /*Sum of connectionRequestSent by TaskId  */ 
+        return 
+        $this->db
+                ->table('tblleadgen')
+                ->selectSum('tblleadgen.totalLinkedInConnections','totalLinkedInConnections')
+                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+                ->where("tbltasks.taskId", $Id)
+                ->groupby('totalLinkedInConnections')                
+                ->get()
+                ->getResultArray();
+    }
+
+    function sumtotalClicksTaskId($id){       
+        /*Sum of connectionRequestSent by TaskId  */ 
+        return 
+        $this->db
+                ->table('tblleadgen')
+                ->selectSum('tblleadgen.clicks','clicks')
+                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+                ->where("tbltasks.taskId", $id)
+                ->groupby('clicks')                
+                ->get()
+                ->getResultArray();
     }
 
 
