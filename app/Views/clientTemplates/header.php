@@ -20,8 +20,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css"
       rel="stylesheet"
     />
+    <!--Date Picker Styling-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/clients/clientDashboard">DAS</a>
@@ -33,14 +36,12 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/clients/clientDashboard">Dashboard</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="navbarRightAlignExample">
           <a class="nav-link" href="/clients/logout">Log Out</a>
         </li>
       </ul>
     </div>
-
   </div>
 </nav>
-    
     
     

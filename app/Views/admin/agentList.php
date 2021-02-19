@@ -37,7 +37,8 @@ if(session()->has('message')){
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email Address</th>
-                        <th scope="col" colspan="4">Option</th>
+                        <th scope="col" colspan="3">Option</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +72,13 @@ if(session()->has('message')){
                                 <a href="<?php echo "getAssignClientsToAgents/" .$agent['agentId']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="View Agent Details">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                            </td>
+                            <td>
+                            <?php //echo $status;?>
+                            <!--
+                            set status code here if status active or not... and update the status on tblaccounts....    
+                            --->
+                            <i class="fas fa-lock-open"></i>
                             </td>
                         </tr>
                         <?php

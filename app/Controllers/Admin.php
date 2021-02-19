@@ -18,6 +18,7 @@ class Admin extends BaseController{
     public $accountModel;
     public $reportsModel;
 	public $tasksModel;
+	public $sessionEmail;
 
 
 	public function __construct(){
@@ -30,20 +31,20 @@ class Admin extends BaseController{
         $this->accountModel = new AccountsModel();
         $this->reportsModel = new ReportsModel();
 		$this->tasksModel = new TasksModel();
-
+		$session = session();
+		$this->sessionEmail = $session->get("accountEmail");
 		helper('form', 'database');
 	}
 	
 	#Admin Dashboard
 	function adminDashboard(){
 		
-		$session = session();
-		$sessionEmail = $session->get("accountEmail");
+		$sessionUser = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		$data = ([
 			'agents' => $this->modelAgents->countAll(),
 			'clients' => $this->modelClients->countAll(),
-			'user' => $this->modelClients->where("clientsEmailAddress", $sessionEmail)->first(),
+			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
 			'countClients'=> $this->accountModel->where("accesslevelsId", 4)->countAll()
 		]);
 
@@ -68,8 +69,8 @@ class Admin extends BaseController{
 		//
         $data = ([
 			"agents" => $this->modelAgents->orderBy('agentId', 'DESC')->findAll(),
-			'accessLevels' => $this->modelAccessLevel->findAll()
-		
+			'accessLevels' => $this->modelAccessLevel->findAll(),
+			"status"=>$this->accountModel->where("accountEmail", $this->sessionEmail)->first()
 		]);	
 
 		echo view('templates/header', $data);

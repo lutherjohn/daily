@@ -51,3 +51,24 @@
         </div>
     </div>
 </section>
+
+
+
+
+
+
+$data = ([
+			"title" => "Agents Dashboard",
+			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll(),
+			"agent"=>$agentById["agentFirstname"] ." " . $agentById["agentLastname"],
+			"leadGens" =>$this->modelAssignLeadGen->getLeadGenByAgentId($agentById["agentId"]),
+			"tasks" => $this->reportsModel->getTaksById(1),
+			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
+			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1)
+		]);
+		
+		
+		
+
+

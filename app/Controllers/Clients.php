@@ -3,6 +3,7 @@
 use App\Models\ClientModel;
 use App\Models\AccessLevelModel;
 use App\Models\AccountsModel;
+use App\Models\ReportsModel;
 
 class Clients extends BaseController
 {	
@@ -10,6 +11,8 @@ class Clients extends BaseController
 	public $clientsModel;
 	public $accessLevel;
 	public $accountModel;
+	public $sessionEmail;
+	public $reportsModel;
 
 
 	public function __construct(){
@@ -17,6 +20,9 @@ class Clients extends BaseController
 		$this->clientsModel = new ClientModel();
 		$this->accessLevel = new AccessLevelModel();
 		$this->accountModel = new AccountsModel();
+		$this->reportsModel = new ReportsModel();
+		$session = session();
+		$this->sessionEmail = $session->get("accountEmail");
 
 		helper("form");
 
@@ -24,12 +30,16 @@ class Clients extends BaseController
 	}
 
 	function clientDashboard(){
-		$session = session();
-		$sessionEmail = $session->get("accountEmail");
+
+		$clientData = $this->clientsModel->where("clientsEmailAddress", $this->sessionEmail)->first();
 
         $data = ([
 			"title" => "Client Page",
-			'user' => $this->clientsModel->where("clientsEmailAddress", $sessionEmail)->first()		
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
+			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1),
+			"leadGens"=>$this->reportsModel->getClientById($clientData["clientsId"])
 		]);	
 
 		echo view('clientTemplates/header', $data);

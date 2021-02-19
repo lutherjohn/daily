@@ -21,7 +21,6 @@ class Agents extends BaseController{
 	public $reportsModel;
 	public $sessionEmail;
 	public $modelAssignLeadGen;
-	public $db;
 
 
 	public function __construct(){
@@ -37,7 +36,6 @@ class Agents extends BaseController{
 		$this->modelAssignLeadGen = new AssignLeadGenModel();
 		$session = session();
 		$this->sessionEmail = $session->get("accountEmail");
-		$this->db = \Config\Database::connect();
 		helper('form', 'database');
 	}
 

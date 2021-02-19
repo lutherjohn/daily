@@ -19,11 +19,22 @@ class ReportsModel extends Model{
     protected $allowedFields = ['taskId','clientsId','agentId','date','connectionRequestSent','totalLinkedInConnections','clicks'];
 
 
+    function getClientById($id = null){
+        
+        return $this->db
+                ->table("tblleadgen")
+                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
+                ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left")
+                ->where("tblleadgen.clientsId", $id)
+                ->get()
+                ->getResultArray();
+    }
 
     function getTasks(){
         return
             $this->db->table("tbltasks")
-                    ->get()->getResultArray();
+                    ->get()
+                    ->getResultArray();
     }
 
     function getTaksById($id = null){
@@ -33,7 +44,8 @@ class ReportsModel extends Model{
                 ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
                 ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
                 ->where("tbltasks.taskId", $id)
-                ->get()->getResultArray();
+                ->get()
+                ->getResultArray();
     }
 
 
@@ -67,10 +79,10 @@ class ReportsModel extends Model{
         return 
         $this->db
                 ->table('tblleadgen')
-                ->selectSum('tblleadgen.totalLinkedInConnections','totalLinkedInConnections')
+                ->select("SUM(`totalLinkedInConnections`) AS totalLinkedInConnections")
                 ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
                 ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
-                ->where("tbltasks.taskId", $Id)
+                ->where("tblleadgen.taskId", $Id)
                 ->groupby('totalLinkedInConnections')                
                 ->get()
                 ->getResultArray();
