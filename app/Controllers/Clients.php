@@ -4,10 +4,12 @@ use App\Models\ClientModel;
 use App\Models\AccessLevelModel;
 use App\Models\AccountsModel;
 use App\Models\ReportsModel;
+use CodeIgniter\API\ResponseTrait;
 
 class Clients extends BaseController
 {	
 
+	use ResponseTrait;
 	public $clientsModel;
 	public $accessLevel;
 	public $accountModel;
@@ -33,18 +35,37 @@ class Clients extends BaseController
 
 		$clientData = $this->clientsModel->where("clientsEmailAddress", $this->sessionEmail)->first();
 
+		/***
+		 * "kpis" =>$this->reportsModel->kpiPerClient()
+		 */
         $data = ([
 			"title" => "Client Page",
 			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
-			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
-			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
-			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1),
-			"leadGens"=>$this->reportsModel->getClientById($clientData["clientsId"])
+			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1,$clientData["clientsId"]),
+			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1,$clientData["clientsId"]),
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1,$clientData["clientsId"]),
+			"leadGens"=>$this->reportsModel->getClientById($clientData["clientsId"])			
 		]);	
 
+
+		header('Content-Type: application/json');
 		echo view('clientTemplates/header', $data);
-		echo view('clients/clientsDashboard');
+		echo view('/clients/clientsDashboard');
         echo view('clientTemplates/footer');  
+	}
+	//search by date
+
+	function searchtaskByDate(){
+
+		$clientData = $this->clientsModel->where("clientsEmailAddress", $this->sessionEmail)->first();
+
+		$startDate = $this->request->getPost("date1");
+		$endDate = $this->request->getPost("date2");
+
+		$data = $this->reportsModel->searchByDate($startDate,$endDate, $clientData["clientsId"]);
+
+		header('Content-Type: application/json');
+		echo json_encode($data, true);
 	}
 
 	#log Out Session

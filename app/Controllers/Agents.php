@@ -48,13 +48,15 @@ class Agents extends BaseController{
 
 		$data = ([
 			"title" => "Agents Dashboard",
+			"LeadGen" => "Lead Generator Daily Activity",
 			"users" =>$this->reportsModel->orderBy('leadGenId', 'DESC')->findAll(),
 			"agent"=>$agentById["agentFirstname"] ." " . $agentById["agentLastname"],
 			"leadGens" =>$this->modelAssignLeadGen->getLeadGenByAgentId($agentById["agentId"]),
 			"tasks" => $this->reportsModel->getTaksById(1),
 			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
 			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
-			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1)
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1),
+			"nameOfDay"=>$this->reportsModel->dayName()
 		]);
 
 		echo view('agentTemplate/header', $data);
@@ -171,6 +173,11 @@ class Agents extends BaseController{
 		echo view('agents/loadLeadGenView');
 		echo view('agentTemplate/footer'); */
 	}
+
+
+	//Search
+
+	
 
 
 

@@ -62,6 +62,7 @@ $routes->get('agents/getLeadGenByTasksId/(:num)', 'agents::getLeadGenByTasksId/$
 $routes->get('agents/loadModal', 'Agents::loadModal',['filter' =>'auth']);
 $routes->get('agents/logout', 'Agents::logout');
 $routes->get('clients/clientDashboard', 'Clients::clientDashboard',['filter' =>'auth']);
+$routes->get('clients/searchtaskByDate' , 'Clients::searchtaskByDate',['filter' =>'auth']);
 $routes->get('clients/logout', 'Clients::logout');
 $routes->get('(:any)', 'Pages::showme/$1');
 

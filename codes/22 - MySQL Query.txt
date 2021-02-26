@@ -1,0 +1,65 @@
+SELECT COUNT(1) DateCount,`date` FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`
+    FROM tblleadgen
+) A GROUP BY `date`;
+============================================================================
+SELECT COUNT(1) DateCount,`date`,SUM(`connectionRequestSent`) conreq FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`,`connectionRequestSent`
+    FROM tblleadgen
+) A GROUP BY `date`,`connectionRequestSent`;
+=======================================================================================
+SELECT COUNT(1) DateCount,`date`,SUM(`connectionRequestSent`) conreq, SUM(`totalLinkedInConnections`) linkedIn, SUM(`clicks`) clickLinks FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`,`connectionRequestSent`,`totalLinkedInConnections`,`clicks`
+    FROM tblleadgen
+) A GROUP BY `date`,`connectionRequestSent`,`totalLinkedInConnections`,`clicks`;
+==============================================================================================
+SELECT COUNT(1) DateCount,`date`,SUM(`connectionRequestSent`) conreq, SUM(`totalLinkedInConnections`) linkedIn, SUM(`clicks`) clickLinks FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`,`connectionRequestSent`,`totalLinkedInConnections`,`clicks`
+    FROM tblleadgen WHERE clientsId = 4
+) A GROUP BY `date`;
+=========================================================================================================================================
+SELECT COUNT(1) DateCount,`date`,SUM(`connectionRequestSent`) conreq, SUM(`totalLinkedInConnections`) linkedIn, SUM(`clicks`) clickLinks FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`,`connectionRequestSent`,`totalLinkedInConnections`,`clicks`
+    FROM tblleadgen
+) WHERE `date` >= "2020-12-04" <= "2020-12-11" A GROUP BY `date`;
+
+===================================================================================================
+SELECT COUNT(1) DateCount,`date`, `totalLinkedInConnections`,`clicks` FROM
+(
+    SELECT DATE(`date` + INTERVAL (6 - DAYOFWEEK(`date`)) DAY) `date`
+    FROM tblleadgen
+) A GROUP BY `date`, `connectionRequestSent`,`totalLinkedInConnections`,`clicks`;
+
+====================================================================================================
+function kpiPerClient($id){
+
+        /* $query = "
+            SELECT COUNT(1) DateCount,'date',SUM('connectionRequestSent') conreq, SUM('totalLinkedInConnections') linkedIn, SUM('clicks') clickLinks FROM
+            (
+                SELECT DATE('date' + INTERVAL (6 - DAYOFWEEK('date')) DAY) 'date','connectionRequestSent','totalLinkedInConnections','clicks'
+                FROM tblleadgen WHERE clientsId = ". $id ."
+            ) A GROUP BY 'date';
+        "; */
+
+        return
+            $this->db
+                ->table('tblleadgen') 
+                ->select("date")
+                ->select('connectionRequestSent')
+                ->selectSum('tblleadgen.connectionRequestSent','totalConnection')
+                ->select('totalLinkedInConnections')
+                ->selectSum("totalLinkedInConnections","totalLinkedInConnections")
+                ->select('clicks')  
+                ->selectSum("clicks", "clicks")
+                ->select("DATE('date' + INTERVAL (6 - DAYOFWEEK('date')) DAY) 'date'")
+                ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left")  
+                ->where("tblclients.clientsId", $id)
+                ->get()
+                ->getResultArray();
+
+    }

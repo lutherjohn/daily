@@ -4,10 +4,35 @@
             <h1>
                 Welcome: &nbsp; 
                 <?php 
-                    echo $agent; 
-                    foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
-                    foreach($totalLinkedInConnections as $i){ $linkedinConnections =  $i['totalLinkedInConnections']; }
-                    foreach($totalclicks as $click){ $clicks =  $click['clicks']; }
+                    echo $agent ."&nbsp;" ; 
+                    if($totalConnection == null){
+
+                        $TotalConnectionRequestSent = "No Data";
+
+                    }else{
+
+                        foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
+                    }
+                    
+                    if($totalLinkedInConnections == null){
+
+                        $linkedinConnections = "No Data";
+
+                    }else{
+
+                        foreach($totalLinkedInConnections as $i){ $linkedinConnections =  $i['totalLinkedInConnections']; }
+                    }
+                    
+                    if($totalclicks == null){
+
+                        $clicks = "No Data";
+
+                    }else{
+                        
+                        foreach($totalclicks as $click){ $clicks = $click['clicks']; }
+                    }
+                    
+                    
                 ?>
             </h1>
         </div>
@@ -16,11 +41,19 @@
             <strong>
                 Task: 
                 <?php 
-                    echo "Lead Generator Daily Activity";
-                    //var_dump($leadGens);
+                    echo $LeadGen;
+                    var_dump($nameOfDay);
                 ?>
             </strong>
         </p>
+        <?php 
+            /* 
+            foreach($nameOfDay as $d){
+
+                echo $d['date'];
+            } 
+            */
+        ?>
         <br>
         <table class="table table-bordered">
             <thead>
@@ -29,8 +62,7 @@
                 <th>Total LinkedIn Connections</th>
                 <th>Clicks</th>
             </thead>
-            <?php
-            
+            <?php            
                 foreach($tasks as $task){
             ?>
             <tr>
@@ -39,7 +71,7 @@
                 <td><?php echo $task['totalLinkedInConnections'];?></td>
                 <td><?php echo $task['clicks'];?></td>
             </tr>
-            <?php
+            <?php                 
 
                 }
             ?>

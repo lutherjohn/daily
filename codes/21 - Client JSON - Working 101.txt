@@ -1,3 +1,6 @@
+<?php 
+    //header('Content-Type: application/json');
+?>
 <br/>
 <section>
     <div class="container">
@@ -26,10 +29,6 @@
                         foreach($totalclicks as $click){ $clicks =  $click['clicks']; }
                     }
                     
-                ?>
-                <?php 
-                
-                //var_dump($kpis);
                 ?>
             </p>
         </div>
@@ -72,56 +71,6 @@
                 </div>
             </div>
         </div> 
-
-        <br/>
-        <!-- <div class="row">
-            <div class="col-sm-4">
-                <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Connection Requests</div>
-                    <div class="card-body">
-                        <h5 class="card-title">&nbsp;</h5>
-                        <p class="card-text">
-
-                            <div id="connectionRequest">                            
-                                
-                            </div>
-                            
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-header"> New LinkedIn connections Added</div>
-                    <div class="card-body">
-                        <h5 class="card-title">&nbsp;</h5>
-                        <p class="card-text">
-
-                            <div id="linkedInConnections">                            
-                                
-                            </div>
-                           
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Link Clicks</div>
-                    <div class="card-body">
-                        <h5 class="card-title">&nbsp;</h5>
-                        <p class="card-text">
-                            
-                            <div id="linkClicks">                            
-                                
-                            </div>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>  -->
-
         <hr>
         <div class="row">
             <div class="col-sm-4">
@@ -151,7 +100,7 @@
                         <th>Clicks</th>
                     </thead>
                     <tbody>
-
+                    
                     </tbody>                    
                 </table>
             </div>
@@ -183,17 +132,14 @@ function searchByDate(){
     var startDate = $("#date1").val();
     var endDate = $("#date2").val();
 
-    if(startDate ==="" && endDate === ""){        
+    if(startDate == "" && endDate == ""){
 
-        $("#table").append("<tr><td colspan='5'>No Start Date and End Date</td></tr>");
-        setTimeout(() => {
-            $("#table tbody").empty();            
-        }, 1500);
+        $("#table").append("<tr><td colspan='4'>No Start Date and End Date</td></tr>");
 
-    }    
-    else{
-
+    }else{
+        //header:{"Content-Type": "application/json"}
         $.ajax({
+            //header:{"Content-Type": "application/json"},
             url: "<?php echo base_url("clients/searchtaskByDate");?>",
             method: "POST",           
             data: {"date1":startDate ,"date2":endDate},
@@ -206,8 +152,6 @@ function searchByDate(){
                     $('#table').append("<tr><th>"+(x++)+"</th><td>"+value.date+"</td><td>"+value.connectionRequestSent+"</td><td>"+value.totalLinkedInConnections+"</td><td>"+value.clicks+"</td></tr>"); 
 
                 });
-            
-                
             },
             error: function (xhr, statusText, ex) {
 

@@ -1,96 +1,13 @@
-	
-		$session = session();
-		$sessionEmail = $session->get("accountEmail");
-
-		$data = ([
-			'agents' => $this->modelAgents->countAll(),
-			'clients' => $this->modelClients->countAll(),
-			'user' => $this->modelClients->where("clientsEmailAddress", $sessionEmail)->first()
-		]);
-		
-Admin:
-Email: mat@onlinetooffline.com.au
-Password: 1234
-
-Client:
-Email: pallen@isearchpartners.net
-Password: 1234
-
-Agents:
-Email: leila@launchpadteam.com
-Password: 123456
+->where("date >= ",$startDate)
+->where("date <=" , $endDate)
 
 
 
-SELECT DAYOFWEEK(`date`) +1 FROM `tblleadgen`
-
-
-
-SELECT DAYNAME(`date`) FROM `tblleadgen`
-
-
-
-SELECT * FROM `tblleadgen` WHERE (DAYOFWEEK(`date`) = 2 OR DAYOFWEEK(`date`) = 6)
-
-SELECT `date` FROM `tblleadgen` WHERE (DAYOFWEEK(`date`) = 2 )
-
-
-SELECT `connectionRequestSent`,`totalLinkedInConnections`,`clicks` FROM `tblleadgen` WHERE (`date` BETWEEN "2020-30-11" AND "2020-12-04")
-
-
-
-
-function searchByDate($startDate, $endDate){
-
-	$this->db
-		 ->table('tblleadgen')
-		 ->select('date','connectionRequestSent','totalLinkedInConnections','clicks')
-		 
-		 ->where(`date >=`, $startDate)
-		 ->where(`date <=`, $endDate)
-		 
-		 ->get()
-		 ->getResultArray();
-
-}
-
-
-function searchByDate($startDate, $endDate){
-
-        $this->db
-             ->table('tblleadgen')
-             ->select(`connectionRequestSent`,`totalLinkedInConnections`,`clicks`)
-             ->where(`date BETWEEN`, $startDate . `AND` . $endDate)
-             ->get()
-             ->getResultArray();
-
-    }
-	
-	<?php
-                if($searchDates == null){
-
-                    echo 'No Data';
-
-                }else{
-                    foreach($searchDates as $d){
-            ?>
-            <tr>
-                <td><?php echo $d["connectionRequestSent"]; ?></td>
-            </tr>
-            <?php
-                    }
-                }
-            ?>
-	
-	
-	
-	
-	
 {
     "title": "mysqli_sql_exception",
     "type": "mysqli_sql_exception",
     "code": 500,
-    "message": "You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'system cannot accept the date entered.\nEnter the new date: (dd-mm-yy)  = '30-...' at line 3",
+    "message": "You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '= '2020-11-30'\nAND   = '2020-12-04'' at line 3",
     "file": "C:\\xampp\\htdocs\\daily\\system\\Database\\MySQLi\\Connection.php",
     "line": 331,
     "trace": [
@@ -101,7 +18,7 @@ function searchByDate($startDate, $endDate){
             "class": "mysqli",
             "type": "->",
             "args": [
-                "SELECT `date`\nFROM `tblleadgen`\nWHERE The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy)  = '30-11-202004-12-2020'"
+                "SELECT `date`\nFROM `tblleadgen`\nWHERE  = '2020-11-30'\nAND   = '2020-12-04'"
             ]
         },
         {
@@ -111,7 +28,7 @@ function searchByDate($startDate, $endDate){
             "class": "CodeIgniter\\Database\\MySQLi\\Connection",
             "type": "->",
             "args": [
-                "SELECT `date`\nFROM `tblleadgen`\nWHERE The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy)  = '30-11-202004-12-2020'"
+                "SELECT `date`\nFROM `tblleadgen`\nWHERE  = '2020-11-30'\nAND   = '2020-12-04'"
             ]
         },
         {
@@ -121,7 +38,7 @@ function searchByDate($startDate, $endDate){
             "class": "CodeIgniter\\Database\\BaseConnection",
             "type": "->",
             "args": [
-                "SELECT `date`\nFROM `tblleadgen`\nWHERE The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy)  = '30-11-202004-12-2020'"
+                "SELECT `date`\nFROM `tblleadgen`\nWHERE  = '2020-11-30'\nAND   = '2020-12-04'"
             ]
         },
         {
@@ -131,10 +48,14 @@ function searchByDate($startDate, $endDate){
             "class": "CodeIgniter\\Database\\BaseConnection",
             "type": "->",
             "args": [
-                "SELECT `date`\nFROM `tblleadgen`\nWHERE The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy)  = :The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy) :",
+                "SELECT `date`\nFROM `tblleadgen`\nWHERE  = ::\nAND   = :0:",
                 {
-                    "The system cannot accept the date entered.\nEnter the new date: (dd-mm-yy) ": [
-                        "30-11-202004-12-2020",
+                    "": [
+                        "2020-11-30",
+                        true
+                    ],
+                    "0": [
+                        "2020-12-04",
                         true
                     ]
                 },
@@ -143,7 +64,7 @@ function searchByDate($startDate, $endDate){
         },
         {
             "file": "C:\\xampp\\htdocs\\daily\\app\\Models\\ReportsModel.php",
-            "line": 108,
+            "line": 109,
             "function": "get",
             "class": "CodeIgniter\\Database\\BaseBuilder",
             "type": "->",
@@ -156,8 +77,8 @@ function searchByDate($startDate, $endDate){
             "class": "App\\Models\\ReportsModel",
             "type": "->",
             "args": [
-                "30-11-2020",
-                "04-12-2020"
+                "2020-11-30",
+                "2020-12-04"
             ]
         },
         {
@@ -167,8 +88,8 @@ function searchByDate($startDate, $endDate){
             "class": "App\\Controllers\\Clients",
             "type": "->",
             "args": [
-                "30-11-2020",
-                "04-12-2020"
+                "2020-11-30",
+                "2020-12-04"
             ]
         },
         {
@@ -244,3 +165,64 @@ function searchByDate($startDate, $endDate){
         }
     ]
 }
+
+==================================================================================
+$key = $this->input->post('key);
+$Date1 = $this->input->post('Date1');
+$Date2 = $this->input->post('Date2');
+
+$store = $this->Search_m->set($key,$Date1,$Date2);//store ang 3 parameters sa model
+echo json_encode(store);
+
+
+$('Date1').val("");
+$('Date2').val("");
+
+#submit.click -> function
+
+var x = 1;
+
+var Date1 = $('Date1').val();
+var Date2 = $('Date2').val();
+
+
+$('#Date1').datepicker({
+	format:"yyyy/mm/dd",
+	autoclose:true,
+	todayHighlight:true
+});
+
+$('#Date2').datepicker({
+	format:"yyyy/mm/dd",
+	autoclose:true,
+	todayHighlight:true
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
