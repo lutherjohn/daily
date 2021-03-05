@@ -20,6 +20,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css"
       rel="stylesheet"
     />
+    <!---Date Picker--->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,6 +45,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin/reportList">Report</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/profile">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/admin/logout">Log Out</a>

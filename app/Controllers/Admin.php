@@ -41,13 +41,21 @@ class Admin extends BaseController{
 		
 		$sessionUser = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
+		header('Content-Type: application/json');
 		$data = ([
 			'agents' => $this->modelAgents->countAll(),
 			'clients' => $this->modelClients->countAll(),
 			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
-			'countClients'=> $this->accountModel->where("accesslevelsId", 4)->countAll()
+			'countClients'=> $this->accountModel->where("accesslevelsId", 4)->countAll(),
+			"kpis" =>$this->reportsModel->kpiAllClient(),
+			"sumOfAlls" =>$this->reportsModel->sumOffAll(),
+			"clientsAdmin" => $this->modelClients->orderby("clientsId", "ASC")->findAll(),
+			"arrayData" => '{"Peter":65,"Harry":80,"John":78,"Clark":90}'
+			
 		]);
-
+		
+		
+		//$data = ;
 
 		echo view('templates/header', $data);
 		echo view('admin/adminDashboard');
@@ -380,6 +388,48 @@ class Admin extends BaseController{
 		
 
 	}
+
+	//Filter/Search
+	function searchtaskByDate(){
+
+		$startDate = $this->request->getPost("date1");
+		$endDate = $this->request->getPost("date2");
+
+		$data = $this->reportsModel->searchByDate($startDate,$endDate);
+
+		header('Content-Type: application/json');
+		echo json_encode($data, true);
+	}
+
+	//Profile
+	function profile(){
+
+		$sessionUser = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
+		$data = ([
+			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
+			"userProfiles"=>$this->modelClients->where("clientsId", $sessionUser["clientsId"])->first(),
+			"arrayData" => '{"Peter":65,"Harry":80,"John":78,"Clark":90}'
+			
+		]);
+		
+
+		echo view('templates/header', $data);
+		echo view('admin/loadAdminProfile');
+		echo view('templates/footer');
+
+	}
+
+	//Password change
+	function changePassword($id){
+
+		//$sessionUser = $this->modelClients->where("account", $this->sessionEmail)->first();
+
+	}
+
+
+
+	
 
 
 	

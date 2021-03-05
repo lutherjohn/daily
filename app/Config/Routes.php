@@ -50,6 +50,8 @@ $routes->get('/admin/crudLeadGen/(:num)', 'Admin::crudLeadGen/$1',['filter' =>'a
 $routes->get('admin/viewTasksById/(:num)','Admin::viewTasksById/$1',['filter' =>'auth']);
 $routes->get('admin/viewAgentsDetails/(:num)', 'Admin::viewAgentsDetails/$1',['filter' =>'auth']);
 $routes->get('admin/clientAgentsData/(:num)', 'Admin::clientAgentsData/$1',['filter' =>'auth']);
+$routes->get('admin/searchtaskByDate' , 'Admin::searchtaskByDate',['filter' =>'auth']);
+$routes->get('admin/profile' , 'Admin::profile',['filter' =>'auth']);
 $routes->get('admin/logout', 'Admin::logout');
 $routes->get('agents/agentsDashboard', 'Agents::agentsDashboard',['filter' =>'auth']);
 $routes->get('agents/clientView', 'Agents::clientView',['filter' =>'auth']);
@@ -63,6 +65,11 @@ $routes->get('agents/loadModal', 'Agents::loadModal',['filter' =>'auth']);
 $routes->get('agents/logout', 'Agents::logout');
 $routes->get('clients/clientDashboard', 'Clients::clientDashboard',['filter' =>'auth']);
 $routes->get('clients/searchtaskByDate' , 'Clients::searchtaskByDate',['filter' =>'auth']);
+$routes->get('clients/clientProfile' , 'Clients::clientProfile',['filter' =>'auth']);
+$routes->get('clients/editClients/(:num)', 'Clients::editClients/$1',['filter' =>'auth']);
+$routes->get('clients/updateClients/(:num)', 'Clients/updateClients/$1',['filter' =>'auth']);
+$routes->get('clients/passwordChangeforClient/(:num)', 'Clients::passwordChangeforClient/$1',['filter' =>'auth']);
+$routes->get('clients/updatePasswordsforClient/(:num)', 'Clients::updatePasswordsforClient/$1',['filter' =>'auth']);
 $routes->get('clients/logout', 'Clients::logout');
 $routes->get('(:any)', 'Pages::showme/$1');
 

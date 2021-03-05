@@ -9,19 +9,19 @@
             <p>
                 <?php 
                      
-                    if($totalConnection == null){
-                        $TotalConnectionRequestSent = "No Data";
+                    if($totalConnection === null){
+                        $TotalConnectionRequestSent = "No Data to show";
                     }else{
                         foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
                     }
                     if($totalLinkedInConnections == null){
-                        $linkedinConnections = "No Data";
+                        $linkedinConnections = "No Data to show";
 
                     }else{
                         foreach($totalLinkedInConnections as $i){ $linkedinConnections =  $i['totalLinkedInConnections']; }
                     }
                     if($totalclicks == null){
-                        $clicks = "No Data";
+                        $clicks = "No Data to show";
                     }else{
                         foreach($totalclicks as $click){ $clicks =  $click['clicks']; }
                     }
@@ -74,7 +74,8 @@
         </div> 
 
         <br/>
-        <!-- <div class="row">
+        <!-- 
+            <div class="row">
             <div class="col-sm-4">
                 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                     <div class="card-header">Connection Requests</div>
@@ -120,8 +121,40 @@
                     </div>
                 </div>
             </div>
-        </div>  -->
+        </div>  
+        -->
+        <hr>
+        <div class="row">
+        <caption>List of Totals Per Weeks</caption>
+            <table class="table">
+            
+                <thead class="table-dark">
+                    <th>Weeks</th>
+                    <th>Date</th>
+                    <th>Connection Requests</th>
+                    <th>LinkedIn connections</th>
+                    <th>Link Clicks</th>
+                </thead>
+                
+                <?php 
+                foreach($kpis as $kpi){
 
+                ?>
+                <tr>
+                    <td><?php echo $kpi['Weeks'];?></td>
+                    <td><?php echo $kpi['date'];?></td>
+                    <td><?php echo $kpi['conreq'];?></td>
+                    <td><?php echo $kpi['linkedIn'];?></td>
+                    <td><?php echo $kpi['clickLinks'];?></td>
+                </tr>
+                <?php
+
+                }
+                
+                ?>
+            </table>
+        
+        </div>
         <hr>
         <div class="row">
             <div class="col-sm-4">

@@ -19,6 +19,39 @@ class ReportsModel extends Model{
     protected $allowedFields = ['taskId','clientsId','agentId','date','connectionRequestSent','totalLinkedInConnections','clicks'];
 
 
+
+
+
+
+    #Admin Side Queries
+    function sumOffAll(){
+        return
+        $this->db
+             ->table("tblleadgen")
+             ->select("SUM(connectionRequestSent) AS totalconnectionRequestSent,SUM(totalLinkedInConnections) AS totalLinkedInConnections,SUM(clicks) AS totalClicks")
+             ->get()
+             ->getResultArray();
+    }
+
+    //KPI for All Clients
+    function kpiAllClient(){
+
+        return
+            $this->db
+                ->query('SELECT COUNT(1) DateCount,WEEK(date) AS Weeks,date,SUM(connectionRequestSent) conreq, SUM(totalLinkedInConnections) linkedIn, SUM(clicks) clickLinks,
+                        clientsFirstname,clientsLastname FROM
+                        (
+                            SELECT DATE(date + INTERVAL (6 - DAYOFWEEK(date)) DAY) date,connectionRequestSent,totalLinkedInConnections,clicks,
+                            clientsFirstname,clientsLastname                            
+                            FROM tblleadgen 
+                            LEFT JOIN tblclients ON tblleadgen.clientsId = tblclients.clientsId
+
+                        ) A GROUP BY date;')
+
+                ->getResultArray();
+
+    }
+
     function getClientById($id = null){
         
         return $this->db
@@ -30,6 +63,7 @@ class ReportsModel extends Model{
                 ->getResultArray();
     }
 
+
     function getTasks(){
         return
             $this->db->table("tbltasks")
@@ -37,6 +71,25 @@ class ReportsModel extends Model{
                     ->getResultArray();
     }
 
+    #Search by Dates under Admin
+
+    function searchByDate($startDate,$endDate){
+        
+        return        
+        $this->db
+             ->table('tblleadgen') 
+             ->select('date,connectionRequestSent,totalLinkedInConnections,clicks')     
+             ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left")    
+             ->where("date >=",$startDate)
+             ->where("date <=",$endDate)
+             ->get()
+             ->getResultArray();
+    
+    }
+
+
+
+    #Client Side Queries
     function getTaksById($id = null){
         
         return $this->db
@@ -47,6 +100,10 @@ class ReportsModel extends Model{
                 ->get()
                 ->getResultArray();
     }
+
+    
+
+
 
 
     function sumConnectionRequestSent(){       
@@ -105,7 +162,7 @@ class ReportsModel extends Model{
                 ->getResultArray();
     }
 
-    function searchByDate($startDate,$endDate,$id){
+    function searchDateById($startDate,$endDate,$id){
         
         return        
         $this->db
@@ -118,31 +175,30 @@ class ReportsModel extends Model{
              ->get()
              ->getResultArray();
     
-    }
+    }   
 
-    function kpiPerClient(){
+    //KPI per Clients
+    function kpiPerClient($id){
 
-        /*
-        $query = "
-            SELECT COUNT(1) DateCount,'date',SUM('connectionRequestSent') conreq, SUM('totalLinkedInConnections') linkedIn, SUM('clicks') clickLinks FROM
-            (
-                SELECT DATE('date' + INTERVAL (6 - DAYOFWEEK('date')) DAY) 'date','connectionRequestSent','totalLinkedInConnections','clicks'
-                FROM tblleadgen WHERE clientsId = ". $id ."
-            ) A GROUP BY 'date';
-        "; 
-        */ 
-        //error
         return
             $this->db
-                ->select('COUNT(1) DateCount,date,SUM(connectionRequestSent) conreq, SUM(totalLinkedInConnections) linkedIn, SUM(clicks) clickLinks FROM
+                ->query('SELECT COUNT(1) DateCount,WEEK(date) AS Weeks,date,SUM(connectionRequestSent) conreq, SUM(totalLinkedInConnections) linkedIn, SUM(clicks) clickLinks FROM
                         (
-                            SELECT DATE(date + INTERVAL (6 - DAYOFWEEK(date)) DAY) date,connectionRequestSent,totalLinkedInConnections,clicks
-                            FROM tblleadgen
+                            SELECT DATE(date + INTERVAL (6 - DAYOFWEEK(date)) DAY) date,connectionRequestSent,totalLinkedInConnections,clicks                            
+                            FROM tblleadgen 
+                            LEFT JOIN tblclients ON tblleadgen.clientsId = tblclients.clientsId
+                            WHERE tblleadgen.clientsId = ' . $id . '
+
                         ) A GROUP BY date;')
-                ->get()
+
                 ->getResultArray();
 
     }
+
+
+
+
+    #Agent Side Queries
 
     function dayName(){       
         /* DayName  */ 

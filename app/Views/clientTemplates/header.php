@@ -40,6 +40,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/clients/clientDashboard">Dashboard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/clients/clientProfile">Profile</a>
+        </li>
         <li class="nav-item" id="navbarRightAlignExample">
           <a class="nav-link" href="/clients/logout">Log Out</a>
         </li>

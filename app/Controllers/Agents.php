@@ -45,6 +45,12 @@ class Agents extends BaseController{
 		//"agent" => $this->modelAgents-where("agentId", $agentById["agentId"])->first()
 		//$agentById["agentFirstname"] ." " . $agentById["agentLastname"]
 		//$this->reportsModel->sumConnectionRequestSent()
+		/****
+		 * 			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
+			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
+			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1),
+		 * 
+		 */
 
 		$data = ([
 			"title" => "Agents Dashboard",
@@ -53,9 +59,6 @@ class Agents extends BaseController{
 			"agent"=>$agentById["agentFirstname"] ." " . $agentById["agentLastname"],
 			"leadGens" =>$this->modelAssignLeadGen->getLeadGenByAgentId($agentById["agentId"]),
 			"tasks" => $this->reportsModel->getTaksById(1),
-			"totalConnection" =>$this->reportsModel->sumConnectionRequestSentByTaskId(1),
-			"totalLinkedInConnections" =>$this->reportsModel->sumtotalLinkedinConnectionsTaskId(1),
-			"totalclicks" =>$this->reportsModel->sumtotalClicksTaskId(1),
 			"nameOfDay"=>$this->reportsModel->dayName()
 		]);
 

@@ -5,7 +5,7 @@
                 Welcome: &nbsp; 
                 <?php 
                     echo $agent ."&nbsp;" ; 
-                    if($totalConnection == null){
+                    /* if($totalConnection == null){
 
                         $TotalConnectionRequestSent = "No Data";
 
@@ -30,7 +30,7 @@
                     }else{
                         
                         foreach($totalclicks as $click){ $clicks = $click['clicks']; }
-                    }
+                    } */
                     
                     
                 ?>
@@ -81,13 +81,13 @@
                 
                 </td>
                 <td>
-                    <?php echo $TotalConnectionRequestSent; ?>
+                    <?php //echo $TotalConnectionRequestSent; ?>
                 </td>
                 <td>
-                    <?php echo $linkedinConnections; ?>
+                    <?php //echo $linkedinConnections; ?>
                 </td>
                 <td>
-                    <?php echo $clicks; ?>
+                    <?php //echo $clicks; ?>
                 </td>
             </tr>
         </table>

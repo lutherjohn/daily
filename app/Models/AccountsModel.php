@@ -46,9 +46,26 @@ class AccountsModel extends Model{
 
     }
 
-    function UpdateEmail($email){
-        $this->db->where("accountEmail", $email);
-        $this->db->update();
+    function UpdateEmail($newEmail, $id){
+
+        return
+            $this->db
+            ->table('tblaccounts')
+            ->where('accountId', $id)
+            ->update(['accountEmail'=>$newEmail]);
+    }
+
+
+    function UpdatePassword($password, $id){
+
+        $newPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        return
+            $this->db
+            ->table('tblaccounts')
+            ->where('accountId', $id)
+            ->update(['accountPassword'=>$newPassword]);
+
     }
 
 }

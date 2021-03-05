@@ -94,7 +94,7 @@ class Pages extends BaseController
 				}
 
 			}else{
-				$session->setFlashdata("message", "Email Not Found");
+				$session->setFlashdata("message", "Empty Fields");
 				session()->setFlashdata('alert-class', 'alert-danger');
 				return redirect()->to('/');
 
