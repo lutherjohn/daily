@@ -1,20 +1,19 @@
-<br />
 <section class="container">
   <?php echo form_open('admin/addAssignClients');?>
-    <div class="p-3">
-        <p class="note note-primary">
-        <strong>Agent Name:</strong>
-            <?php echo $users['agentFirstname']; ?>
-            <?php echo $users['agentMiddlename']; ?>
-            <?php echo $users['agentLastname']; ?>
-        </p>      
-    </div>
+
+    <p class="note note-primary">
+    <strong>Agent Name:</strong>
+        <?php echo $users['agentFirstname']; ?>
+        <?php echo $users['agentMiddlename']; ?>
+        <?php echo $users['agentLastname']; ?>
+    </p>      
+
 
     <div class="row">   
   
         <div class="col-md-6">
             <div class="form-group">
-            <label for="Select2">Select Client/s</label>
+            <label for="Select2">Select Client/s:</label>
                         
                 <select name="multiple_assign" size="15"  multiple ="multiple" class="form-control" id="select1">
                 <?php 
@@ -35,7 +34,7 @@
         </div>
 
         <div class="col-md-6">
-            <label for="Select2"> Client/s Added</label>
+            <label for="Select2"> Client/s Added:</label>
             <input type="hidden" name="users" value="<?php echo $users['agentId']; ?>">
             <select name="multiple_assign2[]" size="15" multiple ="multiple" class="form-control" id="select2">
             </select>                

@@ -1,0 +1,98 @@
+<br>
+<div class="container">
+    <div class="main-body">    
+          <div class="row gutters-sm">            
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                <h3><?php //echo $Title; ?></h3>
+                <?php
+                // Display Response 
+                if(session()->has('message')){
+                ?>
+                <div class="alert <?= session()->getFlashdata('alert-class') ?>">
+                    <?= session()->getFlashdata('message') ?>
+                </div>
+                <?php
+                }
+
+                ?>
+                 <?php
+                // Display Response 
+                if(session()->has('success')){
+                ?>
+                <div class="alert <?= session()->getFlashdata('alert-class') ?>">
+                    <?= session()->getFlashdata('success') ?>
+                </div>
+                <?php
+                }
+
+                ?>
+
+                <?php
+                // Display Response 
+                if(session()->has('error')){
+                ?>
+                <div class="alert <?= session()->getFlashdata('alert-class') ?>">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+                <?php
+                }
+
+                ?>
+                <?php
+                // Display Response 
+                if(session()->has('warning')){
+                ?>
+                <div class="alert <?= session()->getFlashdata('alert-class') ?>">
+                    <?= session()->getFlashdata('warning') ?>
+                </div>
+                <?php
+                }
+
+                ?>
+                <form action="<?php echo base_url() .'/clients/updatePasswordsforClient/'.$userPasswords['accountId']; ?>" method="post" accept-charset="utf-8">
+                <div class="row">       
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Old Password</h6>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="password" name="oldPassword" id="oldPassword">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">       
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">New Password</h6>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="password" name="newPassword" id="newPassword">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Confirm Password</h6>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="password" name="confirmPassword" id="confirmPassword">
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0"></h6>
+                    </div>
+                    <div class="col-sm-9">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>              
+            </div>
+          </div>
+    </div>
+</div>
+
+

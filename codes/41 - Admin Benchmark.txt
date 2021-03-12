@@ -1,0 +1,40 @@
+<div class="card flex-fill w-100">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Benchmark</h5>
+                    <div class="card-body py-3">
+                       <div class="row">
+
+                        <div class="col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Total Connection Request Sent</h5>
+                                        <h1 class="display-5 mt-1 mb-3">
+                                            <?php echo $totalconnectionRequestSent; ?>
+                                        </h1>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">New Connections Added</h5>
+                                        <h1 class="display-5 mt-1 mb-3">
+                                            <?php echo $totalLinkedInConnections; ?>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Total Link Clicks</h5>
+                                        <h1 class="display-5 mt-1 mb-3">
+                                            <?php echo $totalClicks; ?>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                       </div>
+
+                    </div>
+                </div>
+            </div>

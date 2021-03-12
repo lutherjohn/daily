@@ -14,7 +14,7 @@
             Agent Name:
             <?php
                     
-                echo $agent['agentFirstname'] . " " .$agent["agentLastname"];
+                echo $agentById['agentFirstname'] . " " .$agentById["agentLastname"];
             ?> 
             <br /> 
             Client Name:
@@ -44,8 +44,9 @@
                 </div>
                 <div class="col-12">
                     <input type="hidden" name="getClientId" id="getClientId" value ="<?php echo $client['clientsId'];?>">
-                    <input type="hidden" name="getAgentId" id="getAgentId" value ="<?php echo $agent['agentId'] ;?>">
+                    <input type="hidden" name="getAgentId" id="getAgentId" value ="<?php echo $agentById['agentId'] ;?>">
                     <input type="hidden" name="getTaskId" id="getTaskId" class="form-control" value="<?php echo $tasks['taskId']; ?>">
+                    <div class="mt-3"></div>
                     <button type="submit" class="btn btn-primary">Submit</button>                         
                 </div>
             </form> 

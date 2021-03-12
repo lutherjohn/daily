@@ -12,21 +12,27 @@ if(session()->has('message')){
 ?>
 </div>
 
-<br/>
 <section> 
     <div class="container px-4">
         <div class="row">
             <h1>Client Page</h1>            
-        </div> 
+        </div>
+
+        <div class="mt-4"></div>
 
         <div class="row">
             <div class="col-sm">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loadClientsModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadClientsModal">
                     <i class="fas fa-plus-circle"></i> Client 
                 </button>
             </div>
             
         </div>
+        
+        <div class="mt-4"></div>
+
+
+
         <?php
         
             if($clients == null){
@@ -163,7 +169,7 @@ if(session()->has('message')){
         </section>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -175,7 +181,9 @@ if(session()->has('message')){
 
 <script type="text/javascript">
     $( document ).ready(function() {
-        $('#loadClientsModal').modal({ backdrop: 'static' , keyboard: false });
+        //$('#loadClientsModal').modal({ backdrop: 'static' , keyboard: false });
     });
+
+
     
 </script>

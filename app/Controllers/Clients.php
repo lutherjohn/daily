@@ -55,6 +55,7 @@ class Clients extends BaseController
 
 		header('Content-Type: application/json');
 		echo view('clientTemplates/header', $data);
+		echo view('clientTemplates/navigation');
 		echo view('/clients/clientsDashboard');
         echo view('clientTemplates/footer');  
 	}
@@ -62,7 +63,7 @@ class Clients extends BaseController
 
 	function searchtaskByDate(){
 
-		$clientData = $this->clientsModel->where("clientsEmailAddress", $this->sessionEmail)->first();
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		$startDate = $this->request->getPost("date1");
 		$endDate = $this->request->getPost("date2");
@@ -76,12 +77,16 @@ class Clients extends BaseController
 	#CRUD Section
 	function editClients($id){
 
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
 			"clients" => $this->modelClients->where("clientsId", $id)->first(),
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
 			"title" => "Update Client Details"
 		]);
 
 		echo view('clientTemplates/header', $data);
+		echo view('clientTemplates/navigation');
 		echo view('clients/EditClients');
         echo view('clientTemplates/footer'); 
 
@@ -131,6 +136,7 @@ class Clients extends BaseController
 		
 
 		echo view('clientTemplates/header', $data);
+		echo view('clientTemplates/navigation');
 		echo view('clients/clientProfile');
         echo view('clientTemplates/footer'); 
 
@@ -139,17 +145,19 @@ class Clients extends BaseController
 	#password change
 	function passwordChangeforClient($id){
 
-
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		helper(['form','html','cookie']);
 		/* */
 		
 		$data = ([
 			"Title" => "Change Your Password",
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
 			"userPasswords"=>$this->accountModel->where("accountId", $id)->first()			
 		]);
 
 		echo view('clientTemplates/header', $data);
+		echo view('clientTemplates/navigation');
 		echo view('clients/clientChangePassword');
         echo view('clientTemplates/footer');   
 		

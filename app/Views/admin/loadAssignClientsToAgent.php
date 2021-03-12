@@ -1,10 +1,11 @@
+<section class="container"> 
+    <div class="row">
+        <h2><?php echo $title; ?></h2>
+    </div>
 
-<br>
-<section>
-    <div class="container px-4">
-    <div class="row gx-5">
-    <h2><?php echo $title; ?></h2>
-    <br />
+    <div class="mt-4"></div>
+
+    <div class="row">
     <p class="note note-primary">
         <strong>Agent Name:</strong>
         <?php echo $users["agentFirstname"] . " " . $users["agentLastname"]; ?>
@@ -12,9 +13,12 @@
     </p>
     
     <table class="table">
-    <tr>
-        <th>Client/s Name</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Client/s Name</th>
+        </tr>
+    </thead>
+    
             <?php 
                 if($clients == null){
             ?>
@@ -26,22 +30,25 @@
                     foreach($clients as $client){
 
             ?>
-            <tr>
-                <td>
-                    <?php 
-                        echo $client['clientsFirstname'] ;
-                    ?>
-                    &nbsp;
-                    <?php 
-                        echo $client['clientsMiddlename'] ;
-                    ?>
-                    &nbsp;
-                    <?php 
-                        echo $client['clientsLastname'] ;
-                    ?>
-                    
-                </td>      
-            </tr>
+            <tbody>
+                <tr>
+                    <td>
+                        <?php 
+                            echo $client['clientsFirstname'] ;
+                        ?>
+                        &nbsp;
+                        <?php 
+                            echo $client['clientsMiddlename'] ;
+                        ?>
+                        &nbsp;
+                        <?php 
+                            echo $client['clientsLastname'] ;
+                        ?>
+                        
+                    </td>      
+                </tr>
+            </tbody>
+            
 
             <?php
                     }
@@ -51,7 +58,6 @@
     </div>
 
 
-    </div>
     <div class="row">
     <div class="col-md-12">
     <div class="d-flex flex-row-reverse">

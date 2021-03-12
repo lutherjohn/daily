@@ -28,7 +28,23 @@ class ReportsModel extends Model{
         return
         $this->db
              ->table("tblleadgen")
-             ->select("SUM(connectionRequestSent) AS totalconnectionRequestSent,SUM(totalLinkedInConnections) AS totalLinkedInConnections,SUM(clicks) AS totalClicks")
+             ->select("clientsFirstname,clientsLastname,SUM(connectionRequestSent) AS totalconnectionRequestSent,SUM(totalLinkedInConnections) AS totalLinkedInConnections,SUM(clicks) AS totalClicks")
+             ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left") 
+             ->groupBy("clientsFirstname,clientsLastname")
+             ->get()
+             ->getResultArray();
+    }
+
+    #Agent Side Queries
+    function sumOffAllbyAgents($id){
+        return
+        $this->db
+             ->table("tblleadgen")
+             ->select("clientsFirstname,clientsLastname,WEEK(date) AS Weeks,SUM(connectionRequestSent) AS totalconnectionRequestSent,SUM(totalLinkedInConnections) AS totalLinkedInConnections,SUM(clicks) AS totalClicks")
+             ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left") 
+             ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+             ->where("tblleadgen.agentId", $id)
+             ->groupBy("clientsFirstname,clientsLastname")
              ->get()
              ->getResultArray();
     }
@@ -44,7 +60,7 @@ class ReportsModel extends Model{
                             SELECT DATE(date + INTERVAL (6 - DAYOFWEEK(date)) DAY) date,connectionRequestSent,totalLinkedInConnections,clicks,
                             clientsFirstname,clientsLastname                            
                             FROM tblleadgen 
-                            LEFT JOIN tblclients ON tblleadgen.clientsId = tblclients.clientsId
+                            Inner JOIN tblclients ON tblleadgen.clientsId = tblclients.clientsId
 
                         ) A GROUP BY date;')
 
@@ -94,8 +110,10 @@ class ReportsModel extends Model{
         
         return $this->db
                 ->table("tblleadgen")
+                ->select("clientsFirstname,clientsLastname,date,connectionRequestSent,totalLinkedInConnections,clicks") 
                 ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
                 ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+                ->join("tblclients", "tblclients.clientsId = tblleadgen.clientsId", "left")  
                 ->where("tbltasks.taskId", $id)
                 ->get()
                 ->getResultArray();

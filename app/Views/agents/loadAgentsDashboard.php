@@ -2,9 +2,7 @@
     <div class="container">
         <div class="row">
             <h1>
-                Welcome: &nbsp; 
                 <?php 
-                    echo $agent ."&nbsp;" ; 
                     /* if($totalConnection == null){
 
                         $TotalConnectionRequestSent = "No Data";
@@ -42,7 +40,7 @@
                 Task: 
                 <?php 
                     echo $LeadGen;
-                    var_dump($nameOfDay);
+                    //var_dump($nameOfDay);
                 ?>
             </strong>
         </p>
@@ -57,39 +55,34 @@
         <br>
         <table class="table table-bordered">
             <thead>
-                <th>Date</th>
+                <th>Name</th>
+                <th>Week</th>
                 <th>Total Connection Request Sent</th>
                 <th>Total LinkedIn Connections</th>
                 <th>Clicks</th>
             </thead>
-            <?php            
-                foreach($tasks as $task){
-            ?>
-            <tr>
-                <td><?php echo $task['date'];?></td>
-                <td><?php echo $task['connectionRequestSent'];?></td>
-                <td><?php echo $task['totalLinkedInConnections'];?></td>
-                <td><?php echo $task['clicks'];?></td>
-            </tr>
             <?php                 
 
-                }
+            $NoData = "";
+            if($sumOfAlls == null){
+
+                echo $NoData = "No data to Show";
+            }else{
+                foreach($sumOfAlls as $sumOfAll){
             ?>
-            
-            <tr>
-                <td>
+                <tr>
+                    <td><?php echo $sumOfAll["clientsFirstname"] . " " .$sumOfAll["clientsLastname"];?></td>
+                    <td><?php echo $sumOfAll["Weeks"];?></td>
+                    <td><?php echo $sumOfAll["totalconnectionRequestSent"];?></td>
+                    <td><?php echo $sumOfAll["totalLinkedInConnections"];?></td>
+                    <td><?php echo $sumOfAll["totalClicks"];?></td>
+                    
                 
-                </td>
-                <td>
-                    <?php //echo $TotalConnectionRequestSent; ?>
-                </td>
-                <td>
-                    <?php //echo $linkedinConnections; ?>
-                </td>
-                <td>
-                    <?php //echo $clicks; ?>
-                </td>
-            </tr>
+                </tr>
+            <?php
+                }
+            }
+            ?> 
         </table>
         </div>
     </div>

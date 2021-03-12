@@ -52,6 +52,7 @@ $routes->get('admin/viewAgentsDetails/(:num)', 'Admin::viewAgentsDetails/$1',['f
 $routes->get('admin/clientAgentsData/(:num)', 'Admin::clientAgentsData/$1',['filter' =>'auth']);
 $routes->get('admin/searchtaskByDate' , 'Admin::searchtaskByDate',['filter' =>'auth']);
 $routes->get('admin/profile' , 'Admin::profile',['filter' =>'auth']);
+$routes->get('admin/adminChangePassword/(:num)' , 'Admin::adminChangePassword/$1',['filter' =>'auth']);
 $routes->get('admin/logout', 'Admin::logout');
 $routes->get('agents/agentsDashboard', 'Agents::agentsDashboard',['filter' =>'auth']);
 $routes->get('agents/clientView', 'Agents::clientView',['filter' =>'auth']);
@@ -73,7 +74,7 @@ $routes->get('clients/updatePasswordsforClient/(:num)', 'Clients::updatePassword
 $routes->get('clients/logout', 'Clients::logout');
 $routes->get('(:any)', 'Pages::showme/$1');
 
-
+//
 /**
  * --------------------------------------------------------------------
  * Additional Routing

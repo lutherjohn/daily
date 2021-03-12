@@ -19,6 +19,7 @@ class Admin extends BaseController{
     public $reportsModel;
 	public $tasksModel;
 	public $sessionEmail;
+	public $sessionId;
 
 
 	public function __construct(){
@@ -33,6 +34,7 @@ class Admin extends BaseController{
 		$this->tasksModel = new TasksModel();
 		$session = session();
 		$this->sessionEmail = $session->get("accountEmail");
+		$this->sessionId = $session->get("accountId");
 		helper('form', 'database');
 	}
 	
@@ -43,10 +45,10 @@ class Admin extends BaseController{
 
 		header('Content-Type: application/json');
 		$data = ([
-			'agents' => $this->modelAgents->countAll(),
-			'clients' => $this->modelClients->countAll(),
+			"agents" => $this->modelAgents->countAll(),
+			"clients" => $this->modelClients->countAll(),
 			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
-			'countClients'=> $this->accountModel->where("accesslevelsId", 4)->countAll(),
+			"countClients"=> $this->accountModel->where("accesslevelsId", 4)->countAll(),
 			"kpis" =>$this->reportsModel->kpiAllClient(),
 			"sumOfAlls" =>$this->reportsModel->sumOffAll(),
 			"clientsAdmin" => $this->modelClients->orderby("clientsId", "ASC")->findAll(),
@@ -58,6 +60,8 @@ class Admin extends BaseController{
 		//$data = ;
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/adminDashboard');
 		echo view('templates/footer');
 	}
@@ -74,14 +78,21 @@ class Admin extends BaseController{
 
     #region Agent Start
     function agentList(){
-		//
+
+
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
+
         $data = ([
-			"agents" => $this->modelAgents->orderBy('agentId', 'DESC')->findAll(),
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"agents" => $this->modelAgents->orderBy('agentId', 'ASC')->findAll(),
 			'accessLevels' => $this->modelAccessLevel->findAll(),
 			"status"=>$this->accountModel->where("accountEmail", $this->sessionEmail)->first()
 		]);	
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/agentList');
         echo view('templates/footer');        
 
@@ -128,6 +139,8 @@ class Admin extends BaseController{
 		$data["agents"] = $this->modelAgents->getAgentDetail($id);
 										
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadViewAgent');
 		echo view('templates/footer');
 
@@ -137,12 +150,17 @@ class Admin extends BaseController{
 
 	function editAgents($id){
 
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
-			'users' => $this->modelAgents->where('agentId', $id)->first(),
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"users" => $this->modelAgents->where('agentId', $id)->first(),
 			"title" => "Update Agent Details"
 		]);
 		
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadEditAgents');
 		echo view('templates/footer');
 		//loadEditAgents
@@ -189,12 +207,17 @@ class Admin extends BaseController{
 
 	function clientAgentsData($id){
 
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
-			'users' => $this->modelAgents->where('agentId', $id)->first(),
-			'clients' => $this->modelClients->orderby("clientsId", "DESC")->findAll()
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"users" => $this->modelAgents->where('agentId', $id)->first(),
+			"clients" => $this->modelClients->orderby("clientsId", "ASC")->findAll()
 		]);
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadAssignModel');
 		echo view('templates/footer');
 
@@ -202,6 +225,7 @@ class Admin extends BaseController{
 
 	//Assign clients to agents
 	function addAssignClients(){
+
 		$postData = $this->request->getPost();
 		
 		foreach($postData['multiple_assign2'] as $multiple_assign2){
@@ -224,13 +248,19 @@ class Admin extends BaseController{
 
 	// get details
 	function getAssignClientsToAgents($id){
+
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
 			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($id),
 			"users" => $this->modelAgents->where('agentId', $id)->first(),
-			"title"=>"Agents with their Assign Client/s"
+			"title"=>"Agents with their Assigned Client/s"
 
 		]);
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadAssignClientsToAgent');
 		echo view('templates/footer');
 
@@ -242,12 +272,17 @@ class Admin extends BaseController{
 
     function clientList(){
 
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
-			'clients' => $this->modelClients->orderBy('clientsId', 'DESC')->findAll(),
-			'accessLevels' => $this->modelAccessLevel->findAll()
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"clients" => $this->modelClients->orderBy('clientsId', 'ASC')->findAll(),
+			"accessLevels" => $this->modelAccessLevel->findAll()
 		]);
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/clientList');
 		echo view('templates/footer');
 
@@ -291,12 +326,17 @@ class Admin extends BaseController{
 
 	function editClients($id){
 
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
 			"clients" => $this->modelClients->where("clientsId", $id)->first(),
 			"title" => "Update Client Details"
 		]);
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadEditClients');
 		echo view('templates/footer');
 
@@ -409,21 +449,36 @@ class Admin extends BaseController{
 		$data = ([
 			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
 			"userProfiles"=>$this->modelClients->where("clientsId", $sessionUser["clientsId"])->first(),
+			"accounts" =>$this->accountModel->where("accountId", $this->sessionId)->first(),
 			"arrayData" => '{"Peter":65,"Harry":80,"John":78,"Clark":90}'
 			
 		]);
 		
 
 		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
 		echo view('admin/loadAdminProfile');
 		echo view('templates/footer');
 
 	}
 
 	//Password change
-	function changePassword($id){
+	function adminChangePassword($id){
 
-		//$sessionUser = $this->modelClients->where("account", $this->sessionEmail)->first();
+		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+
+		$data = ([
+			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"userPasswords"=>$this->accountModel->where("accountId", $id)->first()	
+		]);
+
+
+		echo view('templates/header', $data);
+		echo view('templates/navigation');
+		echo view('templates/nav');
+		echo view('admin/adminChangePassword');
+		echo view('templates/footer');
 
 	}
 

@@ -9,7 +9,7 @@ if(session()->has('message')){
 }
 
 ?>
-<br />
+
 <section>
     <div class="container">
         <div class="row">
@@ -18,16 +18,20 @@ if(session()->has('message')){
     </div>
 </section>
 
+<div class="mt-4"></div>
+
+
 <section>
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loadAgentModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loadAgentModal">
                     <i class="fas fa-plus-circle"></i> Agent
                 </button>
             </div>
             
         </div>
+        <div class="mt-4"></div>
 
         <div class="row">
             <div class="col-sm">
@@ -94,7 +98,7 @@ if(session()->has('message')){
             
         </div> 
         <div class="col-md-6">
-            <div id="ph_AssignClientsModal" data-bs-toggle="modal" data-bs-target="#loadAssignAgentModal"></div>
+            <div id="ph_AssignClientsModal" data-toggle="modal" data-target="#loadAssignAgentModal"></div>
         </div>        
     </div>
 </section>
@@ -157,7 +161,7 @@ if(session()->has('message')){
         </section>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -168,7 +172,7 @@ if(session()->has('message')){
 <script type="text/javascript">
 
     $( document ).ready(function() {
-        $('#loadAgentModal').modal({ backdrop: 'static' , keyboard: false });
+       // $('#loadAgentModal').modal({ backdrop: 'static' , keyboard: false });
     });
 
    /*  function LoadAssignClients(aId){

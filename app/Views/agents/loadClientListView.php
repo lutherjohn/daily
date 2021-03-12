@@ -1,10 +1,13 @@
+
 <section>
     <div class="container">
+    
         <div class="row">
+        <div class="mt-4"></div>
             <h1><?php echo $title; ?></h1>
         </div>
+        <div class="mt-4"></div>
         <div class="row">
-
             <table class="table">
                 <thead>
                     <th>Name of client</th>

@@ -1,0 +1,96 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <h1>
+                Welcome: &nbsp; 
+                <?php 
+                    echo $agent ."&nbsp;" ; 
+                    /* if($totalConnection == null){
+
+                        $TotalConnectionRequestSent = "No Data";
+
+                    }else{
+
+                        foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
+                    }
+                    
+                    if($totalLinkedInConnections == null){
+
+                        $linkedinConnections = "No Data";
+
+                    }else{
+
+                        foreach($totalLinkedInConnections as $i){ $linkedinConnections =  $i['totalLinkedInConnections']; }
+                    }
+                    
+                    if($totalclicks == null){
+
+                        $clicks = "No Data";
+
+                    }else{
+                        
+                        foreach($totalclicks as $click){ $clicks = $click['clicks']; }
+                    } */
+                    
+                    
+                ?>
+            </h1>
+        </div>
+        <div class="row">
+        <p class="note note-primary">
+            <strong>
+                Task: 
+                <?php 
+                    echo $LeadGen;
+                    //var_dump($nameOfDay);
+                ?>
+            </strong>
+        </p>
+        <?php 
+            /* 
+            foreach($nameOfDay as $d){
+
+                echo $d['date'];
+            } 
+            */
+        ?>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <th>Date</th>
+                <th>Total Connection Request Sent</th>
+                <th>Total LinkedIn Connections</th>
+                <th>Clicks</th>
+            </thead>
+            <?php            
+                foreach($tasks as $task){
+            ?>
+            <tr>
+                <td><?php echo $task['date'];?></td>
+                <td><?php echo $task['connectionRequestSent'];?></td>
+                <td><?php echo $task['totalLinkedInConnections'];?></td>
+                <td><?php echo $task['clicks'];?></td>
+            </tr>
+            <?php                 
+
+                }
+            ?>
+            
+            <tr>
+                <td>
+                
+                </td>
+                <td>
+                    <?php //echo $TotalConnectionRequestSent; ?>
+                </td>
+                <td>
+                    <?php //echo $linkedinConnections; ?>
+                </td>
+                <td>
+                    <?php //echo $clicks; ?>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</section>

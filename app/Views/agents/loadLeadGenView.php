@@ -1,10 +1,11 @@
-<br />
+<div class="mt-4"></div>
+
 <section>
     <div class="container">
         <div class="row">
             <h1><?php echo $title; ?></h1>
         </div>
-        <div class="row">
+
 
             <p class="note note-primary">
                 <label for="client">Agent Name:</label>
@@ -56,7 +57,7 @@
                ?>
             </table>
             <?php echo form_close(); ?>
-        </div>
+  
     </div>
     
 

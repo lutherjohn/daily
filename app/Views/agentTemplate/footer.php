@@ -1,7 +1,55 @@
 
-    <!-- MDB -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+  </div>
+      <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 Daily Activity System | Agent</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.4
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+    </div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/jquery/jquery.min.js';?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/jquery-ui/jquery-ui.min.js';?>"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/bootstrap/js/bootstrap.bundle.min.js';?>"></script>
+<!-- ChartJS -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/chart.js/Chart.min.js';?>"></script>
+<!-- Sparkline -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/sparklines/sparkline.js';?>"></script>
+<!-- JQVMap -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/jqvmap/jquery.vmap.min.js';?>"></script>
+<script src="<?php echo base_url() .'/agent-assets/plugins/jqvmap/maps/jquery.vmap.usa.js';?>"></script>
+<!-- jQuery Knob Chart -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/jquery-knob/jquery.knob.min.js';?>"></script>
+<!-- daterangepicker -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/moment/moment.min.js';?>"></script>
+<script src="<?php echo base_url() .'/agent-assets/plugins/daterangepicker/daterangepicker.js';?>"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js';?>"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/summernote/summernote-bs4.min.js';?>"></script>
+<!-- overlayScrollbars -->
+<script src="<?php echo base_url() .'/agent-assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js';?>"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url() .'/agent-assets/dist/js/adminlte.js';?>"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="<?php echo base_url() .'/agent-assets/dist/js/pages/dashboard.js';?>"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="<?php echo base_url() .'/agent-assets/dist/js/demo.js';?>"></script>
     </body>
 </html>

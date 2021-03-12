@@ -59,12 +59,36 @@ class Agents extends BaseController{
 			"agent"=>$agentById["agentFirstname"] ." " . $agentById["agentLastname"],
 			"leadGens" =>$this->modelAssignLeadGen->getLeadGenByAgentId($agentById["agentId"]),
 			"tasks" => $this->reportsModel->getTaksById(1),
+			"sumOfAlls" =>$this->reportsModel->sumOffAllbyAgents($agentById["agentId"]),
 			"nameOfDay"=>$this->reportsModel->dayName()
 		]);
 
 		echo view('agentTemplate/header', $data);
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');		
 		echo view('agents/loadAgentsDashboard');
 		echo view('agentTemplate/footer');
+	}
+
+	function agentsProfile(){
+
+		$sessionUser = $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first();
+
+		$data = ([
+			"agents" => $sessionUser["agentFirstname"] ." ". $sessionUser["agentLastname"],
+			"userProfiles"=>$this->modelAgents->where("agentId", $sessionUser["cliagentIdentsId"])->first(),
+			"accounts" =>$this->accountModel->where("accountId", $this->sessionId)->first(),
+			"arrayData" => '{"Peter":65,"Harry":80,"John":78,"Clark":90}'
+			
+		]);
+		
+
+		echo view('agentTemplate/header', $data);
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');		
+		echo view('agents/loadAgentsProfile');
+		echo view('agentTemplate/footer');
+
 	}
 
 	#LogOut Session
@@ -84,6 +108,8 @@ class Agents extends BaseController{
 		]);
 
 		echo view('agentTemplate/header', $data);
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');
 		echo view('agents/loadAgentsView');
 		echo view('agentTemplate/footer');
 	}
@@ -95,10 +121,13 @@ class Agents extends BaseController{
 		$data = ([
 			"title" => "Client Assigned",
 			"clients" => $this->modelAddClientsToAgents->getAssignClientsToAgent($agentId['agentId']),
+			"agent"=>$agentId["agentFirstname"] ." " . $agentId["agentLastname"],
 			
 		]);		
 
 		echo view('agentTemplate/header',$data);
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');
 		echo view('agents/loadClientListView');
 		echo view('agentTemplate/footer');
 
@@ -107,15 +136,20 @@ class Agents extends BaseController{
 
 	function getClientsToAgent($id){
 
+		$agentId = $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first();
+
 		$data = ([			
 			"title" => "Lead Generation",
 			"client" => $this->modelClients->where("clientsId", $id)->first(),
 			"tasks" => $this->modelTasks->orderby("taskId", "ASC")->findAll(),
-			"agentName"=> $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first()
+			"agentName"=> $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first(),
+			"agent"=>$agentId["agentFirstname"] ." " . $agentId["agentLastname"]
 		]);
 
 		
 		echo view('agentTemplate/header',$data);
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');
 		echo view('agents/loadLeadGenView');
 		echo view('agentTemplate/footer');
 	}
@@ -133,6 +167,8 @@ class Agents extends BaseController{
 
 	function getLeadGenByTasksId($id){
 
+		$agentId = $this->modelAgents->where("agentEmailAddress", $this->sessionEmail)->first();
+
 		$leadGens =$this->modelAssignLeadGen->getLeadGenId($id);
 
 		foreach($leadGens as $leadGen){
@@ -145,12 +181,15 @@ class Agents extends BaseController{
 		$data = ([
 			"title" => "Add Lead Gen",
 			"tasks" => $this->modelTasks->where("taskId", $id)->first(),
-			"agent" => $this->modelAgents->where("agentId", $aId)->first(),
-			"client"=>$this->modelClients->where("clientsId", $cId)->first()
+			"agentById" => $this->modelAgents->where("agentId", $aId)->first(),
+			"client"=>$this->modelClients->where("clientsId", $cId)->first(),
+			"agent"=>$agentId["agentFirstname"] ." " . $agentId["agentLastname"]
 			
 		]);	
 
 		echo view('agentTemplate/header',$data);	
+		echo view('agentTemplate/nav');
+		echo view('agentTemplate/navigation');
 		echo view('agents/loadLeadGenModal');
 		echo view('agentTemplate/footer');
 	}
