@@ -138,21 +138,6 @@ if(session()->has('message')){
                         <input type="password" name="password" class="form-control" id="inputpassword" placeholder="">
                     </div>
                     <div class="col-12">
-                        <label for="inputaccessLevels" class="form-label">Access Levels</label>
-                        <br>
-                        <select name="userRules" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                            <option value="#"> Choose User Levels</option>
-                            <?php foreach($accessLevels as $accessLevel): ?>
-
-                                <option value="<?php echo $accessLevel['accesslevelsId']; ?>"><?php echo $accessLevel['accessLevels']; ?></option>
-
-
-                            <?php endforeach;?>
-
-                        </select>
-                        
-                    </div>
-                    <div class="col-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     </form>                                         

@@ -230,6 +230,17 @@ class ReportsModel extends Model{
                 ->getResultArray();
     }
 
+    function getAgentDetail($id=null){
+
+        return 
+        $this->db->table("tblleadgen")
+                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
+                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
+                ->where("tbltasks.taskId", $id)
+                ->get()
+                ->getResultArray();
+    }
+
 
 
 }

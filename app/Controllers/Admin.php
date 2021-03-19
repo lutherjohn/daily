@@ -41,6 +41,7 @@ class Admin extends BaseController{
 	#Admin Dashboard
 	function adminDashboard(){
 		
+		$session = session();
 		$sessionUser = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		header('Content-Type: application/json');
@@ -275,7 +276,7 @@ class Admin extends BaseController{
 		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		$data = ([
-			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			//"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
 			"clients" => $this->modelClients->orderBy('clientsId', 'ASC')->findAll(),
 			"accessLevels" => $this->modelAccessLevel->findAll()
 		]);
@@ -359,6 +360,8 @@ class Admin extends BaseController{
 		]);
 
 		$this->modelClients->update($updateClientId , $data);
+
+		$this->accountModel->UpdateEmail($postData['updateEmail'], $updateClientId);
 
 		session()->setFlashdata('message', 'Updated Successfully!');
 		session()->setFlashdata('alert-class', 'alert-success');
@@ -481,6 +484,14 @@ class Admin extends BaseController{
 		echo view('templates/footer');
 
 	}
+
+	#change Email Address
+	/***
+	 * change email address per clients and agents
+	 */
+
+
+	#Setting up status
 
 
 

@@ -1,6 +1,6 @@
 <?php 
                      
-    if($totalConnection === null){
+    if($totalConnection === ""){
         $TotalConnectionRequestSent = "No Data to show";
     }else{
         foreach($totalConnection as $k){ $TotalConnectionRequestSent =  $k['totalConnection']; }
@@ -131,7 +131,19 @@
                     </thead>
                     
                     <?php 
-                    foreach($kpis as $kpi){
+                    if($kpis == NULL){
+
+                    ?>
+                    
+                        <tr>
+                            <td colspan="5">No data to show</td>
+                        </tr>
+                        
+                    <?php
+                    }else{
+
+                    
+                        foreach($kpis as $kpi){
 
                     ?>
                     <tr>
@@ -142,6 +154,8 @@
                         <td><?php echo $kpi['clickLinks'];?></td>
                     </tr>
                     <?php
+
+                        }
 
                     }
                     

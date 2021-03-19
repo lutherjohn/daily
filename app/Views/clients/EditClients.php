@@ -29,7 +29,7 @@
                     <label for="inputMiddlename" class="form-label">Middlename</label>
                     <input type="text" name="updateMiddlename" class="form-control" id="inputMiddlename" value="<?php echo $clients['clientsMiddlename']; ?>">
                     <label for="inputemail" class="form-label">Email Address</label>
-                    <input type="text" name="updateEmail" class="form-control" id="inputemail" value="<?php echo $clients['clientsEmailAddress']; ?>">
+                    <input type="text" name="updateClientsEmail" class="form-control" id="inputemail" value="<?php echo $clients['clientsEmailAddress']; ?>">
                 </div>
                 <div class="col-md-6">
                     <label for="inputMiddlename" class="form-label">Joint Venture</label>
@@ -38,6 +38,7 @@
                 <br/>
                 <div class="col-12">
                     <input type="hidden" name="updateClientId" class="form-control" id="inputupdateUserId" value="<?php echo $clients['clientsId']; ?>">
+                    <input type="hidden" name="updateAccountId" class="form-control" id="inputupdateAaccountId" value="<?php echo $accounts['accountId']; ?>">
                     <button type="submit" class="btn btn-info" name="submit">Update Details</button>
                     <button type="button" onclick="redirectTo()" class="btn btn-warning">Cancel</button>
                 </div>       

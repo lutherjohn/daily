@@ -46,7 +46,7 @@ class AccountsModel extends Model{
 
     }
 
-    function UpdateEmail($newEmail, $id){
+    function UpdateEmail($id,$newEmail){
 
         return
             $this->db

@@ -12,19 +12,28 @@ class AgentsModel extends Model{
 
     protected $returnType = 'array';
     
-    protected $allowedFields = ["agentId", "agentLastname","agentFirstname","agentMiddlename","agentEmailAddress"];
+    protected $allowedFields = [
+                                "agentId", 
+                                "agentLastname",
+                                "agentFirstname",
+                                "agentMiddlename",
+                                "agentEmailAddress",
+                                "agentPassword",
+                                "agentAccountStatus",
+                                "agentAccessLevel"
+                                ];
 
     protected $beforeInsert = ['beforeInsert'];
 
     protected $beforeUpdate = ['beforeUpdate'];
 
 
+
     protected function beforeInsert(array $data){
-       
+
         $data = $this->passwordHash($data);
 
-        return $data;
-        
+        return $data;    
 
     }
 
@@ -46,17 +55,5 @@ class AgentsModel extends Model{
         return $data;
 
     }
-
-    function getAgentDetail($id=null){
-
-        return 
-        $this->db->table("tblleadgen")
-                ->join("tbltasks", "tbltasks.taskId = tblleadgen.taskId", "left")
-                ->join("tblagents", "tblagents.agentId = tblleadgen.agentId", "left")
-                ->where("tbltasks.taskId", $id)
-                ->get()
-                ->getResultArray();
-    }
-
     
 }

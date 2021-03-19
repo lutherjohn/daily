@@ -9,6 +9,8 @@ class Auth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // if user not logged in
+        $session = session();
+        
         if(session()->get('accountStatus') == 0){
             // then redirct to login page
             return redirect()->to('/'); 

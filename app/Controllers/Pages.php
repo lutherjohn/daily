@@ -38,9 +38,6 @@ class Pages extends BaseController
 		echo view('pages/login');
 		echo view('LoginTemplates/footer');
 		
-
-
-		
 	}
 
 	function loginValidation(){
@@ -69,6 +66,7 @@ class Pages extends BaseController
 						"accountEmail" =>$data["accountEmail"],
 						"accountStatus" => 1
 					];
+
 					if($accessLevel == 1){
 						//Admin Page
 						$session->set($ses_data);
@@ -77,7 +75,9 @@ class Pages extends BaseController
 					}else if($accessLevel == 2){
 						//Agents Page
 						$session->set($ses_data);
+
 						return redirect()->to('/agents/agentsDashboard');
+
 
 					}else if($accessLevel == 3){
 

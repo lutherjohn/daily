@@ -30,6 +30,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+//['filter' =>'auth']
 $routes->get('/', 'Pages::index');
 $routes->get('pages/dashboard', 'Pages::dashboard');
 $routes->get('pages/loginValidation', 'Pages::loginValidation');
@@ -63,6 +64,11 @@ $routes->get('agents/InserLeadGenDetails', 'Agents::InserLeadGenDetails',['filte
 $routes->get('agents/InsertTaskById/(:num)', 'Agents::InsertTaskById/$1');
 $routes->get('agents/getLeadGenByTasksId/(:num)', 'agents::getLeadGenByTasksId/$1',['filter' =>'auth']);
 $routes->get('agents/loadModal', 'Agents::loadModal',['filter' =>'auth']);
+$routes->get('agents/agentsProfile', 'Agents::agentsProfile',['filter' =>'auth']);
+$routes->get('agents/agentChangePassword/(:num)', 'Agents::agentChangePassword/$1',['filter' =>'auth']);
+$routes->get('agents/editAgentsData/(:num)', 'Agents::editAgentsData/$1',['filter' =>'auth']);
+$routes->get('agents/updateAgentDetails', 'Agents::updateAgentDetails',['filter' =>'auth']);
+$routes->get('agents/updatePasswordsforAgents/(:num)', 'Agents::updatePasswordsforAgents/$1',['filter' =>'auth'],['filter' =>'auth']);
 $routes->get('agents/logout', 'Agents::logout');
 $routes->get('clients/clientDashboard', 'Clients::clientDashboard',['filter' =>'auth']);
 $routes->get('clients/searchtaskByDate' , 'Clients::searchtaskByDate',['filter' =>'auth']);

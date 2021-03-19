@@ -87,7 +87,14 @@
                     $NoData = "";
                     if($sumOfAlls == null){
 
-                        echo $NoData = "No data to Show";
+                    ?>
+                    <tr>
+
+                        <td colspan="4"><?php echo $NoData = "No data to Show"; ?></td>
+
+                    </tr>                       
+
+                    <?php
                     }else{
                         foreach($sumOfAlls as $sumOfAll){
                     ?>
@@ -207,7 +214,7 @@
 </div>
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
     $('#date1').datepicker({
         format:"yyyy/mm/dd",
@@ -223,6 +230,7 @@
 </script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 
 $("#date1").val("");

@@ -3,7 +3,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/agents/agentsDashboard" class="brand-link">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light pb-3">DAS Version 1</span>
     </a>
 
     <!-- Sidebar -->
@@ -12,7 +12,13 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
           <a href="/agents/agentsDashboard" class="d-block">
-            <?php echo $agent; ?>
+            Welcome: &nbsp; 
+            <?php 
+            //$session = session();
+            //echo $session->accountEmail;
+            //echo $agent;
+            ?>
+
           </a>
         </div>
       </div>
@@ -32,7 +38,7 @@
           </li>
           <li class="nav-item">
             <a href="/agents/agentsProfile" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-address-card"></i>
               <p>
                 Profile
               </p>

@@ -36,6 +36,7 @@ class Clients extends BaseController
 	}
 
 	function clientDashboard(){
+		$session = session();
 
 		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
@@ -56,7 +57,7 @@ class Clients extends BaseController
 		header('Content-Type: application/json');
 		echo view('clientTemplates/header', $data);
 		echo view('clientTemplates/navigation');
-		echo view('/clients/clientsDashboard');
+		echo view('clients/clientsDashboard');
         echo view('clientTemplates/footer');  
 	}
 	//search by date
@@ -77,11 +78,14 @@ class Clients extends BaseController
 	#CRUD Section
 	function editClients($id){
 
+		$session = session();
+
 		$clientData = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
 
 		$data = ([
 			"clients" => $this->modelClients->where("clientsId", $id)->first(),
 			"user" => $clientData["clientsFirstname"] ." ". $clientData["clientsLastname"],
+			"accounts" =>$this->accountModel->where("accountId", $this->sessionId)->first(),
 			"title" => "Update Client Details"
 		]);
 
@@ -93,10 +97,15 @@ class Clients extends BaseController
 	}
 
 	function updateClients(){
+		$session = session();
 
 		$postData = $this->request->getPost();
 
 		$updateClientId = $this->request->getPost("updateClientId");
+		$updateEmailAddress = $postData['updateClientsEmail'];
+		$getAccountId = $postData["updateAccountId"];
+
+		$this->accountModel->UpdateEmail($getAccountId,$updateEmailAddress);
 
 		$data = ([
 			"clientsFirstname" => $postData['updateFirstname'],
@@ -105,17 +114,19 @@ class Clients extends BaseController
 			"clientsBussinessName" =>$postData['updateBussinessName'],
 			"clientsCampaignGoals" =>$postData['updateCampaignGoals'],
 			"clientsJointVenture" => $postData['updateJointVenture'],
-			"clientsEmailAddress" =>$postData['updateEmail']
+			"clientsEmailAddress" =>$postData['updateClientsEmail']
 		]);
 
-		$this->modelClients->update($updateClientId , $data);
+		$this->modelClients->update($updateClientId,$data);
 
-		$this->accountModel->UpdateEmail($postData['updateEmail'], $updateClientId);
+		
 
 		session()->setFlashdata('message', 'Updated Successfully!');
 		session()->setFlashdata('alert-class', 'alert-success');
 
-		return redirect()->to('clientDashboard');
+		return redirect()->to('/clients/clientProfile');
+		//return redirect()->to('/agents/editAgentsData/' .$getAgentId);
+		//error on updating
 
     }
 
@@ -124,7 +135,9 @@ class Clients extends BaseController
 
 	function clientProfile(){
 
-		$sessionUser = $this->modelClients->where("clientsEmailAddress", $this->sessionEmail)->first();
+		$session = session();
+		//isset($this->config['accountEmail']);
+		$sessionUser = $this->modelClients->where("clientsEmailAddress", $_SESSION["accountEmail"])->first();
 
 		$data = ([
 			"user" => $sessionUser["clientsFirstname"] ." ". $sessionUser["clientsLastname"],
@@ -169,46 +182,11 @@ class Clients extends BaseController
 
 		helper(['form']);
 
-		$data = [];
-		$data['userPasswords'] = $this->accountModel->where("accountId", $id)->first();
-		//lack checking on password verify
+		$postData = $this->request->getPost("newPassword");
 
+		$this->accountModel->UpdatePassword($postData,$id);
 
-
-		if($this->request->getMethod() == 'post'){
-
-			$session = session();
-			$oldPassword = $this->request->getPost("oldPassword");
-			$newPassword = $this->request->getPost("newPassword");
-			$confirmPassword = $this->request->getPost("confirmPassword");
-			
-
-			if($oldPassword == "" || $newPassword == "" || $confirmPassword == ""){
-
-				$session->setFlashdata("message", "You have entered an empty fields");
-				session()->setFlashdata('alert-class', 'alert-danger');
-				return redirect()->to('/clients/passwordChangeforClient/'.$id);  
-
-			}else{
-
-				$passwordVerify = password_verify($oldPassword,$this->sessionPassword);
-
-				if($newPassword != $confirmPassword){
-
-					$session->setFlashdata("error", "Please Match the New and Confirm Password");
-					session()->setFlashdata('alert-class', 'alert-warning');
-					return redirect()->to('/clients/passwordChangeforClient/'.$id); 
-	
-				}else{
-					$session->setFlashdata('success', 'Password Updated successfully',3);
-					session()->setFlashdata('alert-class', 'alert-success');
-					return redirect()->to('/clients/passwordChangeforClient/'.$id);
-
-				}
-			}
-
-		}
-
+		return redirect()->to('/clients/passwordChangeforClient/' .$id); 
 
 	}
 

@@ -76,13 +76,11 @@
                   </div>
                 </div>
               </div>
-                <div class="col-sm-6 mb-3">
-                  <div class="card h-100">
-                    <div class="card-body">
-                      <button class="btn btn-primary" onclick="redirectToChangePassword()">Change Password</button>
-                      <button class="btn btn-warning" onclick="redirectTo()" >Edit Profile</button>
-                    </div>
-                  </div>
+                <div class="col-sm-6">
+
+                    <button class="btn btn-primary" onclick="redirectToChangePassword()">Change Password</button>
+                    <button class="btn btn-warning" onclick="redirectTo()" >Edit Profile</button>
+
                 </div>
               </div>
             </div>
